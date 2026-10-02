@@ -14,7 +14,7 @@
 |---|---|
 | `refs/mdk/` | NeoForge 26.3 の雛形（ModDevGradle）。build.gradle・mods.toml の書き方の基準 |
 | `refs/neoforge-docs/docs/` | NeoForge ドキュメント（最新版。26.x 用の versioned_docs はまだない） |
-| `mcsrc/` | バニラ + NeoForge パッチ済みのソース（`build/moddev/artifacts/minecraft-patched-*-sources.jar` を展開したもの。NeoForge を更新したら展開し直す）。`FenceBlock`・`FenceGateBlock`・`AxeItem`・`Blocks`・datagen の見本はここ |
+| `mcsrc/` | バニラ + NeoForge パッチ済みのソース（`build/moddev/artifacts/minecraft-patched-*-sources.jar` と、`~/.gradle/caches/modules-2/.../neoforge-<ver>-sources.jar` を展開したもの。NeoForge を更新したら展開し直す）。`FenceBlock`・`FenceGateBlock`・`AxeItem`・`Blocks`・datagen の見本はここ |
 
 ## ルール
 - `refs/`・`mcsrc/` 配下は編集しない・実行しない。

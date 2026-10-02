@@ -14,5 +14,7 @@ public class LogFences {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public LogFences(IEventBus modEventBus, ModContainer modContainer) {
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
     }
 }
