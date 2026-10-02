@@ -1,6 +1,8 @@
 package com.nokopi.logfences.datagen;
 
 import com.nokopi.logfences.LogFences;
+import com.nokopi.logfences.ModBlocks;
+import com.nokopi.logfences.ModCreativeTabs;
 
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -16,6 +18,8 @@ public final class ModLanguageProvider {
 
         @Override
         protected void addTranslations() {
+            this.addBlock(ModBlocks.OAK_LOG_FENCE, "Oak Log Fence");
+            this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
     }
 
@@ -26,6 +30,8 @@ public final class ModLanguageProvider {
 
         @Override
         protected void addTranslations() {
+            this.addBlock(ModBlocks.OAK_LOG_FENCE, "オークの原木のフェンス");
+            this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
     }
 }

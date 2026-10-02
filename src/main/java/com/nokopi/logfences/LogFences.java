@@ -16,5 +16,7 @@ public class LogFences {
     public LogFences(IEventBus modEventBus, ModContainer modContainer) {
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
+        ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+        modEventBus.addListener(ModCreativeTabs::addToVanillaTabs);
     }
 }

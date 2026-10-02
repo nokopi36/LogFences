@@ -27,6 +27,12 @@
 - 言語ファイルは `en_us.json` と `ja_jp.json` の両方を更新する。可能な限りデータ生成で出力する。
 - テクスチャは新規に作らず、バニラの原木（`minecraft:block/<wood>_log` / `stripped_<wood>_log`）をモデルから参照する。
 
+## 26.3 での注意（ドキュメントが追いついていない点）
+- レシピ・ルートテーブルの datagen はリロード可能なレジストリ方式: `event.createReloadableRegistryObjects(new RegistrySetBuilder().add(Registries.LOOT_TABLE, new LootTableProvider(...)).add(RecipeProvider.asBootstrap(...)))`。見本は `mcsrc/net/neoforged/neoforge/client/ClientNeoForgeMod.java`
+- タグの `add` は `ResourceKey`（`DeferredHolder#getKey()`）。ブロックとアイテム共通のタグは `BlockItemTags`
+- 燃料は `Item.Properties#cookingFuel(ContextIntProviders.*)`。テクスチャは `Material`（`TextureMapping.getBlockTexture`）
+- 斧で剥ぐ処理などのブロック変換はデータ駆動（`data/minecraft/block_transformer/axe.json`）
+
 ## 利用範囲とライセンス
 CurseForge で公開予定。ライセンスは MIT（`LICENSE`）。
 公開前に CurseForge の最新の規約（AI 利用に関する規定を含む）を確認する。

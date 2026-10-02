@@ -1,0 +1,19 @@
+{
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "__comment": "Lower rail. Side faces are rotated so the bark grain runs along the rail",
+      "from": [7, 6, 0],
+      "to": [9, 9, 9],
+      "faces": {
+        "down":  { "uv": [7, 0, 9, 9], "texture": "#side" },
+        "up":    { "uv": [7, 0, 9, 9], "texture": "#side" },
+        "north": { "uv": [7, 7, 9, 10], "texture": "#side", "cullface": "north" },
+        "west":  { "uv": [9, 7, 12, 16], "texture": "#side", "rotation": 90 },
+        "east":  { "uv": [9, 7, 12, 16], "texture": "#side", "rotation": 90 }
+      }
+    }
+  ]
+}
