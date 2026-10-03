@@ -46,6 +46,14 @@ public enum LogWood {
         return this.logName + "_fence_gate";
     }
 
+    public String strippedFenceName() {
+        return "stripped_" + this.fenceName();
+    }
+
+    public String strippedFenceGateName() {
+        return "stripped_" + this.fenceGateName();
+    }
+
     public WoodType woodType() {
         return this.woodType;
     }
@@ -61,6 +69,11 @@ public enum LogWood {
 
     public String japaneseName() {
         return this.japaneseName;
+    }
+
+    // バニラに合わせ、原木は「樹皮を剥いだ」、ネザーの幹は「表皮を剥いだ」
+    public String strippedJapaneseName() {
+        return (this.logName.endsWith("_stem") ? "表皮" : "樹皮") + "を剥いだ" + this.japaneseName;
     }
 
     // バニラのブロック・アイテムは登録後に参照するため、メソッドで取り出す

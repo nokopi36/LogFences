@@ -27,6 +27,8 @@ public class ModRecipeProvider extends RecipeProvider {
         for (LogWood wood : LogWood.values()) {
             logFence(ModItems.fence(wood).get(), wood.log());
             logFenceGate(ModItems.fenceGate(wood).get(), wood.log());
+            logFence(ModItems.strippedFence(wood).get(), wood.strippedLog());
+            logFenceGate(ModItems.strippedFenceGate(wood).get(), wood.strippedLog());
         }
     }
 

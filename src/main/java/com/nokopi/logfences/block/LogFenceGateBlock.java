@@ -1,13 +1,19 @@
 package com.nokopi.logfences.block;
 
+import java.util.function.Supplier;
+
+import com.nokopi.logfences.item.StrippedLogFenceItem;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,10 +24,13 @@ import net.minecraft.world.phys.Vec3;
 
 public class LogFenceGateBlock extends FenceGateBlock {
     private final boolean flammable;
+    // 樹皮を剥いだ版のアイテム（ブロックより後に登録されるので Supplier で受け取る）
+    private final Supplier<? extends Item> strippedItem;
 
-    public LogFenceGateBlock(WoodType type, Properties properties, boolean flammable) {
+    public LogFenceGateBlock(WoodType type, Properties properties, boolean flammable, Supplier<? extends Item> strippedItem) {
         super(type, properties);
         this.flammable = flammable;
+        this.strippedItem = strippedItem;
         this.registerDefaultState(BarkStripping.withAllBark(this.defaultBlockState(), GatePart.values()));
     }
 
@@ -60,5 +69,14 @@ public class LogFenceGateBlock extends FenceGateBlock {
     @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return this.flammable ? LogFenceProperties.FIRE_SPREAD_SPEED : 0;
+    }
+
+    // 全部位が剥がれていれば、ピックブロックで剥いだ版を取る
+    @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
+        if (StrippedLogFenceItem.isAllStripped(state, GatePart.values())) {
+            return new ItemStack(this.strippedItem.get());
+        }
+        return super.getCloneItemStack(level, pos, state, includeData, player);
     }
 }

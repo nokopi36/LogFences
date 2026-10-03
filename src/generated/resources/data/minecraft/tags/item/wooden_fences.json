@@ -1,5 +1,17 @@
 {
   "values": [
+    "log_fences:stripped_oak_log_fence",
+    "log_fences:stripped_spruce_log_fence",
+    "log_fences:stripped_birch_log_fence",
+    "log_fences:stripped_jungle_log_fence",
+    "log_fences:stripped_acacia_log_fence",
+    "log_fences:stripped_dark_oak_log_fence",
+    "log_fences:stripped_mangrove_log_fence",
+    "log_fences:stripped_cherry_log_fence",
+    "log_fences:stripped_pale_oak_log_fence",
+    "log_fences:stripped_poplar_log_fence",
+    "log_fences:stripped_crimson_stem_fence",
+    "log_fences:stripped_warped_stem_fence",
     "log_fences:oak_log_fence",
     "log_fences:spruce_log_fence",
     "log_fences:birch_log_fence",

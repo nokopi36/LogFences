@@ -7,8 +7,27 @@
       },
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "log_fences:mangrove_log_fence_gate"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "log_fences:mangrove_log_fence_gate",
+                "state": {
+                  "inner_stripped": "true",
+                  "lower_stripped": "true",
+                  "post_stripped": "true",
+                  "upper_stripped": "true"
+                }
+              },
+              "name": "log_fences:stripped_mangrove_log_fence_gate"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "log_fences:mangrove_log_fence_gate"
+            }
+          ]
         }
       ],
       "rolls": 1

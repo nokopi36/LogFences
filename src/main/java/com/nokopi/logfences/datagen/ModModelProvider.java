@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.nokopi.logfences.LogFences;
 import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
+import com.nokopi.logfences.ModItems;
 import com.nokopi.logfences.block.FencePart;
 import com.nokopi.logfences.block.GatePart;
 
@@ -52,6 +53,13 @@ public class ModModelProvider extends ModelProvider {
         for (LogWood wood : LogWood.values()) {
             createLogFence(blockModels, ModBlocks.fence(wood).get(), wood.log(), wood.strippedLog());
             createLogFenceGate(blockModels, ModBlocks.fenceGate(wood).get(), wood.log(), wood.strippedLog());
+
+            // 剥いだ版のアイテムは、剥いだ原木のテクスチャのインベントリモデル
+            TextureMapping stripped = logTextures(wood.strippedLog());
+            blockModels.registerSimpleItemModel(ModItems.strippedFence(wood).get(), LOG_FENCE_INVENTORY.createWithSuffix(
+                    ModBlocks.fence(wood).get(), STRIPPED_SUFFIX, stripped, blockModels.modelOutput));
+            blockModels.registerSimpleItemModel(ModItems.strippedFenceGate(wood).get(), LOG_FENCE_GATE_INVENTORY.createWithSuffix(
+                    ModBlocks.fenceGate(wood).get(), STRIPPED_SUFFIX, stripped, blockModels.modelOutput));
         }
     }
 

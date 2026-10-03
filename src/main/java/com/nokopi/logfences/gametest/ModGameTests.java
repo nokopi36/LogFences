@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import com.nokopi.logfences.LogFences;
 import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
+import com.nokopi.logfences.ModItems;
 import com.nokopi.logfences.block.FencePart;
 import com.nokopi.logfences.block.GatePart;
 import com.nokopi.logfences.block.StrippablePart;
@@ -27,10 +28,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,6 +57,8 @@ public final class ModGameTests {
             TEST_FUNCTIONS.register("gate_strip_and_toggle", () -> ModGameTests::gateStripAndToggle);
     public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> ALL_WOODS_REGISTERED =
             TEST_FUNCTIONS.register("all_woods_registered", () -> ModGameTests::allWoodsRegistered);
+    public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> STRIPPED_PLACE_AND_DROP =
+            TEST_FUNCTIONS.register("stripped_place_and_drop", () -> ModGameTests::strippedPlaceAndDrop);
 
     // data/log_fences/structure/test_area.nbt（空の 3x3x3）
     private static final Identifier TEST_AREA = Identifier.fromNamespaceAndPath(LogFences.MODID, "test_area");
@@ -222,7 +228,44 @@ public final class ModGameTests {
                 Identifier id = BuiltInRegistries.BLOCK.getKey(block);
                 helper.assertTrue(server.getRecipeManager().byKey(ResourceKey.create(Registries.RECIPE, id)).isPresent(), id + " has no recipe");
             }
+            for (Item stripped : List.of(ModItems.strippedFence(wood).get(), ModItems.strippedFenceGate(wood).get())) {
+                Identifier id = BuiltInRegistries.ITEM.getKey(stripped);
+                helper.assertTrue(server.getRecipeManager().byKey(ResourceKey.create(Registries.RECIPE, id)).isPresent(), id + " has no recipe");
+            }
+            // 剥いだ版を登録しても、ブロック → アイテムの対応は普通の版のまま
+            helper.assertTrue(ModBlocks.fence(wood).get().asItem() == ModItems.fence(wood).get(), wood + " fence asItem is not the normal item");
+            helper.assertTrue(ModBlocks.fenceGate(wood).get().asItem() == ModItems.fenceGate(wood).get(), wood + " gate asItem is not the normal item");
         }
         helper.succeed();
+    }
+
+    // SPEC 3.5: 剥いだ版は全部位が剥がれた状態で置かれ、全部剥がれていれば剥いだ版をドロップする
+    private static void strippedPlaceAndDrop(GameTestHelper helper) {
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+
+        BlockPos fencePos = placeOnFloor(helper, player, new BlockPos(0, 0, 1), new ItemStack(ModItems.strippedFence(LogWood.OAK).get()));
+        assertStripped(helper, fencePos, true, true, true);
+        BlockPos gatePos = placeOnFloor(helper, player, new BlockPos(2, 0, 1), new ItemStack(ModItems.strippedFenceGate(LogWood.OAK).get()));
+        assertGateStripped(helper, gatePos, true, true, true, true);
+
+        assertDrop(helper, helper.getBlockState(fencePos), ModItems.strippedFence(LogWood.OAK).get());
+        assertDrop(helper, helper.getBlockState(gatePos), ModItems.strippedFenceGate(LogWood.OAK).get());
+        // 一部だけ剥がれたものは普通の版
+        assertDrop(helper, helper.getBlockState(fencePos).setValue(FencePart.LOWER_RAIL.strippedProperty(), false), ModItems.fence(LogWood.OAK).get());
+        assertDrop(helper, helper.getBlockState(gatePos).setValue(GatePart.INNER_POST.strippedProperty(), false), ModItems.fenceGate(LogWood.OAK).get());
+        helper.succeed();
+    }
+
+    private static BlockPos placeOnFloor(GameTestHelper helper, Player player, BlockPos floor, ItemStack stack) {
+        helper.setBlock(floor, Blocks.STONE);
+        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        click(helper, player, floor, new Vec3(0.5, 1.0, 0.5), Direction.UP);
+        return floor.above();
+    }
+
+    private static void assertDrop(GameTestHelper helper, BlockState state, Item expected) {
+        ServerLevel level = helper.getLevel();
+        List<ItemStack> drops = Block.getDrops(state, level, helper.absolutePos(BlockPos.ZERO), null);
+        helper.assertTrue(drops.size() == 1 && drops.get(0).is(expected), state + " should drop " + expected + " but dropped " + drops);
     }
 }

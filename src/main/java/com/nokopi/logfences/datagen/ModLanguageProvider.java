@@ -4,6 +4,7 @@ import com.nokopi.logfences.LogFences;
 import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.ModCreativeTabs;
+import com.nokopi.logfences.ModItems;
 
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -22,6 +23,8 @@ public final class ModLanguageProvider {
             for (LogWood wood : LogWood.values()) {
                 this.addBlock(ModBlocks.fence(wood), wood.englishName() + " Fence");
                 this.addBlock(ModBlocks.fenceGate(wood), wood.englishName() + " Fence Gate");
+                this.addItem(ModItems.strippedFence(wood), "Stripped " + wood.englishName() + " Fence");
+                this.addItem(ModItems.strippedFenceGate(wood), "Stripped " + wood.englishName() + " Fence Gate");
             }
             this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
@@ -37,6 +40,8 @@ public final class ModLanguageProvider {
             for (LogWood wood : LogWood.values()) {
                 this.addBlock(ModBlocks.fence(wood), wood.japaneseName() + "のフェンス");
                 this.addBlock(ModBlocks.fenceGate(wood), wood.japaneseName() + "のフェンスゲート");
+                this.addItem(ModItems.strippedFence(wood), wood.strippedJapaneseName() + "のフェンス");
+                this.addItem(ModItems.strippedFenceGate(wood), wood.strippedJapaneseName() + "のフェンスゲート");
             }
             this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }

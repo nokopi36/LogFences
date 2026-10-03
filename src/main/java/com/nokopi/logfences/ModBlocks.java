@@ -20,11 +20,11 @@ public final class ModBlocks {
     static {
         for (LogWood wood : LogWood.values()) {
             FENCES.put(wood, BLOCKS.registerBlock(wood.fenceName(),
-                    p -> new LogFenceBlock(p, wood.flammable()),
+                    p -> new LogFenceBlock(p, wood.flammable(), () -> ModItems.strippedFence(wood).get()),
                     p -> commonProperties(p, wood).sound(wood.woodType().soundType())));
             // ゲートの音（設置・開閉）は FenceGateBlock が WoodType から設定する
             FENCE_GATES.put(wood, BLOCKS.registerBlock(wood.fenceGateName(),
-                    p -> new LogFenceGateBlock(wood.woodType(), p, wood.flammable()),
+                    p -> new LogFenceGateBlock(wood.woodType(), p, wood.flammable(), () -> ModItems.strippedFenceGate(wood).get()),
                     p -> commonProperties(p, wood)));
         }
     }

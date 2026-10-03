@@ -1,5 +1,7 @@
 package com.nokopi.logfences;
 
+import java.util.List;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -14,7 +16,7 @@ public final class ModCreativeTabs {
 
     public static final String TAB_TITLE = "itemGroup." + LogFences.MODID;
 
-    // 専用タブ: 木の種類ごとにフェンス・ゲートの順で並べる
+    // 専用タブ: 木の種類ごとにフェンス → ゲート → 剥いだフェンス → 剥いだゲートの順で並べる
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> LOG_FENCES_TAB = CREATIVE_MODE_TABS.register("log_fences", () -> CreativeModeTab.builder()
             .title(Component.translatable(TAB_TITLE))
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
@@ -23,6 +25,8 @@ public final class ModCreativeTabs {
                 for (LogWood wood : LogWood.values()) {
                     output.accept(ModItems.fence(wood).get());
                     output.accept(ModItems.fenceGate(wood).get());
+                    output.accept(ModItems.strippedFence(wood).get());
+                    output.accept(ModItems.strippedFenceGate(wood).get());
                 }
             })
             .build());
@@ -34,9 +38,12 @@ public final class ModCreativeTabs {
     static void addToVanillaTabs(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             for (LogWood wood : LogWood.values()) {
-                ItemStack fence = new ItemStack(ModItems.fence(wood).get());
-                event.insertAfter(new ItemStack(wood.vanillaFenceGate()), fence, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
-                event.insertAfter(fence, new ItemStack(ModItems.fenceGate(wood).get()), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+                ItemStack previous = new ItemStack(wood.vanillaFenceGate());
+                for (ItemStack stack : List.of(new ItemStack(ModItems.fence(wood).get()), new ItemStack(ModItems.fenceGate(wood).get()),
+                        new ItemStack(ModItems.strippedFence(wood).get()), new ItemStack(ModItems.strippedFenceGate(wood).get()))) {
+                    event.insertAfter(previous, stack, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+                    previous = stack;
+                }
             }
         }
     }

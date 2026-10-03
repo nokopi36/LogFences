@@ -26,8 +26,15 @@ public class ModItemTagsProvider extends BlockTagCopyingItemTagProvider {
         this.copy(BlockItemTags.FENCE_GATES.block(), BlockItemTags.FENCE_GATES.item());
         // バニラと同じく、ネザーの木のフェンス・ゲートは燃えない木材として扱う
         for (LogWood wood : LogWood.values()) {
+            // 剥いだ版のアイテムはブロックを持たないので、アイテムのタグに直接入れる
+            this.tag(BlockItemTags.WOODEN_FENCES.item()).add(ModItems.strippedFence(wood).getKey());
+            this.tag(BlockItemTags.FENCE_GATES.item()).add(ModItems.strippedFenceGate(wood).getKey());
             if (!wood.flammable()) {
-                this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(ModItems.fence(wood).getKey()).add(ModItems.fenceGate(wood).getKey());
+                this.tag(ItemTags.NON_FLAMMABLE_WOOD)
+                        .add(ModItems.fence(wood).getKey())
+                        .add(ModItems.fenceGate(wood).getKey())
+                        .add(ModItems.strippedFence(wood).getKey())
+                        .add(ModItems.strippedFenceGate(wood).getKey());
             }
         }
     }

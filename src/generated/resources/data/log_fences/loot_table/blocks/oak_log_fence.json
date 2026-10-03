@@ -7,8 +7,26 @@
       },
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "log_fences:oak_log_fence"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "log_fences:oak_log_fence",
+                "state": {
+                  "lower_stripped": "true",
+                  "post_stripped": "true",
+                  "upper_stripped": "true"
+                }
+              },
+              "name": "log_fences:stripped_oak_log_fence"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "log_fences:oak_log_fence"
+            }
+          ]
         }
       ],
       "rolls": 1
