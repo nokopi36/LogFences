@@ -22,13 +22,13 @@ public class LogFenceGateBlock extends FenceGateBlock {
     public LogFenceGateBlock(WoodType type, Properties properties, boolean flammable) {
         super(type, properties);
         this.flammable = flammable;
-        this.registerDefaultState(BarkStripping.withAllBark(this.defaultBlockState()));
+        this.registerDefaultState(BarkStripping.withAllBark(this.defaultBlockState(), GatePart.values()));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        for (FencePart part : FencePart.values()) {
+        for (GatePart part : GatePart.values()) {
             builder.add(part.strippedProperty());
         }
     }
@@ -43,7 +43,7 @@ public class LogFenceGateBlock extends FenceGateBlock {
         Vec3 local = hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
         // ゲートは向きに対して左右対称なので、長さ方向の座標だけ取り出せばよい
         double along = state.getValue(FACING).getAxis() == Direction.Axis.Z ? local.x : local.z;
-        FencePart part = FencePart.fromGateHit(along, local.y, state.getValue(IN_WALL));
+        GatePart part = GatePart.fromHit(along, local.y, state.getValue(IN_WALL));
         if (BarkStripping.isStripped(state, part)) {
             // 剥がれ済みの部位なら開閉する
             return InteractionResult.TRY_WITH_EMPTY_HAND;

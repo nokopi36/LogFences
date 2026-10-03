@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import com.nokopi.logfences.LogFences;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.block.FencePart;
+import com.nokopi.logfences.block.GatePart;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -79,7 +80,7 @@ public final class ModGameTests {
     }
 
     private static void assertPart(GameTestHelper helper, FencePart expected, double x, double y, double z, boolean hasRails) {
-        FencePart actual = FencePart.fromFenceHit(x, y, z, hasRails);
+        FencePart actual = FencePart.fromHit(x, y, z, hasRails);
         helper.assertTrue(actual == expected,
                 "(" + x + ", " + y + ", " + z + ", rails=" + hasRails + ") expected " + expected + " but was " + actual);
     }
@@ -132,21 +133,23 @@ public final class ModGameTests {
 
     // SPEC 3.3: ゲートの部位判定（along はゲートの長さ方向）
     private static void gatePartDetection(GameTestHelper helper) {
-        // 両端の柱・内側の縦木は柱
-        assertGatePart(helper, FencePart.POST, 1.0 / 16.0, 13.5 / 16.0, false);
-        assertGatePart(helper, FencePart.POST, 15.0 / 16.0, 7.5 / 16.0, false);
-        assertGatePart(helper, FencePart.POST, 8.0 / 16.0, 13.5 / 16.0, false);
+        // 両端の柱
+        assertGatePart(helper, GatePart.POST, 1.0 / 16.0, 13.5 / 16.0, false);
+        assertGatePart(helper, GatePart.POST, 15.0 / 16.0, 7.5 / 16.0, false);
+        // 扉の内側の縦木（左右どちらも）
+        assertGatePart(helper, GatePart.INNER_POST, 7.0 / 16.0, 13.5 / 16.0, false);
+        assertGatePart(helper, GatePart.INNER_POST, 9.0 / 16.0, 7.5 / 16.0, false);
         // 扉の横木
-        assertGatePart(helper, FencePart.UPPER_RAIL, 4.0 / 16.0, 13.5 / 16.0, false);
-        assertGatePart(helper, FencePart.LOWER_RAIL, 12.0 / 16.0, 7.5 / 16.0, false);
+        assertGatePart(helper, GatePart.UPPER_RAIL, 4.0 / 16.0, 13.5 / 16.0, false);
+        assertGatePart(helper, GatePart.LOWER_RAIL, 12.0 / 16.0, 7.5 / 16.0, false);
         // 塀付き（3/16 下がる）: 上の横木 y 9〜12/16、下の横木 y 3〜6/16
-        assertGatePart(helper, FencePart.UPPER_RAIL, 4.0 / 16.0, 10.5 / 16.0, true);
-        assertGatePart(helper, FencePart.LOWER_RAIL, 4.0 / 16.0, 4.5 / 16.0, true);
+        assertGatePart(helper, GatePart.UPPER_RAIL, 4.0 / 16.0, 10.5 / 16.0, true);
+        assertGatePart(helper, GatePart.LOWER_RAIL, 4.0 / 16.0, 4.5 / 16.0, true);
         helper.succeed();
     }
 
-    private static void assertGatePart(GameTestHelper helper, FencePart expected, double along, double y, boolean inWall) {
-        FencePart actual = FencePart.fromGateHit(along, y, inWall);
+    private static void assertGatePart(GameTestHelper helper, GatePart expected, double along, double y, boolean inWall) {
+        GatePart actual = GatePart.fromHit(along, y, inWall);
         helper.assertTrue(actual == expected,
                 "gate(" + along + ", " + y + ", wall=" + inWall + ") expected " + expected + " but was " + actual);
     }
@@ -163,7 +166,7 @@ public final class ModGameTests {
 
         // z = 4/16 の上の横木
         click(helper, player, pos, new Vec3(0.5, 13.5 / 16.0, 4.0 / 16.0), Direction.EAST);
-        assertStripped(helper, pos, false, true, false);
+        assertGateStripped(helper, pos, false, false, true, false);
         helper.assertBlockProperty(pos, FenceGateBlock.OPEN, false);
 
         // 剥がれ済みの上の横木をもう一度 → 開く（斧は減らない）
@@ -174,12 +177,25 @@ public final class ModGameTests {
         // 開いているときは柱を狙っても剥がれず、閉じる
         click(helper, player, pos, new Vec3(0.5, 0.5, 1.0 / 16.0), Direction.EAST);
         helper.assertBlockProperty(pos, FenceGateBlock.OPEN, false);
-        assertStripped(helper, pos, false, true, false);
+        assertGateStripped(helper, pos, false, false, true, false);
 
-        // 閉じた状態で内側の縦木 → 柱が剥がれる
+        // 閉じた状態で内側の縦木 → 内側の縦木だけ剥がれ、両端の柱は残る
         click(helper, player, pos, new Vec3(0.5, 0.5, 8.0 / 16.0), Direction.EAST);
-        assertStripped(helper, pos, true, true, false);
-        helper.assertTrue(axe.getDamageValue() == 2, "axe damage should be 2 but was " + axe.getDamageValue());
+        assertGateStripped(helper, pos, false, true, true, false);
+
+        // 両端の柱
+        click(helper, player, pos, new Vec3(0.5, 0.5, 15.0 / 16.0), Direction.EAST);
+        assertGateStripped(helper, pos, true, true, true, false);
+        helper.assertTrue(axe.getDamageValue() == 3, "axe damage should be 3 but was " + axe.getDamageValue());
         helper.succeed();
+    }
+
+    private static void assertGateStripped(GameTestHelper helper, BlockPos pos, boolean post, boolean inner, boolean upper, boolean lower) {
+        BlockState state = helper.getBlockState(pos);
+        helper.assertTrue(state.getValue(GatePart.POST.strippedProperty()) == post
+                        && state.getValue(GatePart.INNER_POST.strippedProperty()) == inner
+                        && state.getValue(GatePart.UPPER_RAIL.strippedProperty()) == upper
+                        && state.getValue(GatePart.LOWER_RAIL.strippedProperty()) == lower,
+                "expected post=" + post + " inner=" + inner + " upper=" + upper + " lower=" + lower + " but was " + state);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.nokopi.logfences.LogFences;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.block.FencePart;
+import com.nokopi.logfences.block.GatePart;
 
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -113,7 +114,7 @@ public class ModModelProvider extends ModelProvider {
         for (String shape : GATE_SHAPES) {
             boolean open = shape.contains("_open");
             boolean inWall = shape.contains("_wall");
-            for (FencePart part : FencePart.values()) {
+            for (GatePart part : GatePart.values()) {
                 ModelTemplate template = template("template_log_fence_gate" + shape + "_" + gatePartName(part), shape + "_" + gatePartName(part));
                 for (boolean isStripped : new boolean[] {false, true}) {
                     MultiVariant model = BlockModelGenerators.plainVariant(
@@ -134,9 +135,10 @@ public class ModModelProvider extends ModelProvider {
         blockModels.registerSimpleItemModel(gate, LOG_FENCE_GATE_INVENTORY.create(gate, bark, blockModels.modelOutput));
     }
 
-    private static String gatePartName(FencePart part) {
+    private static String gatePartName(GatePart part) {
         return switch (part) {
             case POST -> "post";
+            case INNER_POST -> "inner";
             case UPPER_RAIL -> "upper";
             case LOWER_RAIL -> "lower";
         };

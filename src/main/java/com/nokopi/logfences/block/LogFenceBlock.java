@@ -21,7 +21,7 @@ public class LogFenceBlock extends FenceBlock {
     public LogFenceBlock(Properties properties, boolean flammable) {
         super(properties);
         this.flammable = flammable;
-        this.registerDefaultState(BarkStripping.withAllBark(this.defaultBlockState()));
+        this.registerDefaultState(BarkStripping.withAllBark(this.defaultBlockState(), FencePart.values()));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class LogFenceBlock extends FenceBlock {
             return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
         Vec3 local = hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
-        FencePart part = FencePart.fromFenceHit(local.x, local.y, local.z, hasRails(state));
+        FencePart part = FencePart.fromHit(local.x, local.y, local.z, hasRails(state));
         if (BarkStripping.isStripped(state, part)) {
             // 剥がれ済みなら何もせず、通常の右クリック（リードを結ぶなど）に回す
             return InteractionResult.TRY_WITH_EMPTY_HAND;

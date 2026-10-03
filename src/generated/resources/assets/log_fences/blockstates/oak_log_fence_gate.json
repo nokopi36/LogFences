@@ -96,6 +96,100 @@
     },
     {
       "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "log_fences:block/oak_log_fence_gate_upper",
         "y": 180
       },
@@ -374,6 +468,100 @@
         "in_wall": "false",
         "open": "true",
         "post_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_open_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_open_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_open_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_open_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "false",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_open_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_open_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_open_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_open_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "false",
+        "inner_stripped": "true",
+        "open": "true"
       }
     },
     {
@@ -660,6 +848,100 @@
     },
     {
       "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "false"
+      }
+    },
+    {
+      "apply": {
         "model": "log_fences:block/oak_log_fence_gate_wall_upper",
         "y": 180
       },
@@ -938,6 +1220,100 @@
         "in_wall": "true",
         "open": "true",
         "post_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_open_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_open_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_open_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_wall_open_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "true",
+        "inner_stripped": "false",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_open_inner",
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_open_inner",
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_open_inner"
+      },
+      "when": {
+        "facing": "south",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences:block/oak_log_fence_gate_stripped_wall_open_inner",
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "in_wall": "true",
+        "inner_stripped": "true",
+        "open": "true"
       }
     },
     {

@@ -29,12 +29,12 @@ public final class BarkStripping {
         return transformer != null && transformer.is(BlockTransformers.AXE);
     }
 
-    public static boolean isStripped(BlockState state, FencePart part) {
+    public static boolean isStripped(BlockState state, StrippablePart part) {
         return state.getValue(part.strippedProperty());
     }
 
     // 部位を剥いで、バニラの原木と同じ音・ゲームイベント・斧の耐久消費を起こす
-    public static void strip(BlockState state, FencePart part, Level level, BlockPos pos, Player player, ItemStack axe,
+    public static void strip(BlockState state, StrippablePart part, Level level, BlockPos pos, Player player, ItemStack axe,
             InteractionHand hand) {
         BlockState stripped = state.setValue(part.strippedProperty(), true);
         level.setBlock(pos, stripped, Block.UPDATE_ALL_IMMEDIATE);
@@ -43,8 +43,8 @@ public final class BarkStripping {
         axe.hurtAndBreak(AXE_DAMAGE_PER_STRIP, player, hand.asEquipmentSlot());
     }
 
-    public static BlockState withAllBark(BlockState state) {
-        for (FencePart part : FencePart.values()) {
+    public static BlockState withAllBark(BlockState state, StrippablePart[] parts) {
+        for (StrippablePart part : parts) {
             state = state.setValue(part.strippedProperty(), false);
         }
         return state;
