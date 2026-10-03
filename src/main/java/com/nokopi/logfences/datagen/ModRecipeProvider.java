@@ -1,5 +1,6 @@
 package com.nokopi.logfences.datagen;
 
+import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModItems;
 
 import net.minecraft.advancements.Advancement;
@@ -23,8 +24,10 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        logFence(ModItems.OAK_LOG_FENCE.get(), Items.OAK_LOG);
-        logFenceGate(ModItems.OAK_LOG_FENCE_GATE.get(), Items.OAK_LOG);
+        for (LogWood wood : LogWood.values()) {
+            logFence(ModItems.fence(wood).get(), wood.log());
+            logFenceGate(ModItems.fenceGate(wood).get(), wood.log());
+        }
     }
 
     private void logFence(ItemLike result, ItemLike log) {

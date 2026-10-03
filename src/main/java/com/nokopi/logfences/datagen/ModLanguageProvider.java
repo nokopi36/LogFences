@@ -1,6 +1,7 @@
 package com.nokopi.logfences.datagen;
 
 import com.nokopi.logfences.LogFences;
+import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.ModCreativeTabs;
 
@@ -18,8 +19,10 @@ public final class ModLanguageProvider {
 
         @Override
         protected void addTranslations() {
-            this.addBlock(ModBlocks.OAK_LOG_FENCE, "Oak Log Fence");
-            this.addBlock(ModBlocks.OAK_LOG_FENCE_GATE, "Oak Log Fence Gate");
+            for (LogWood wood : LogWood.values()) {
+                this.addBlock(ModBlocks.fence(wood), wood.englishName() + " Fence");
+                this.addBlock(ModBlocks.fenceGate(wood), wood.englishName() + " Fence Gate");
+            }
             this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
     }
@@ -31,8 +34,10 @@ public final class ModLanguageProvider {
 
         @Override
         protected void addTranslations() {
-            this.addBlock(ModBlocks.OAK_LOG_FENCE, "オークの原木のフェンス");
-            this.addBlock(ModBlocks.OAK_LOG_FENCE_GATE, "オークの原木のフェンスゲート");
+            for (LogWood wood : LogWood.values()) {
+                this.addBlock(ModBlocks.fence(wood), wood.japaneseName() + "のフェンス");
+                this.addBlock(ModBlocks.fenceGate(wood), wood.japaneseName() + "のフェンスゲート");
+            }
             this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
     }

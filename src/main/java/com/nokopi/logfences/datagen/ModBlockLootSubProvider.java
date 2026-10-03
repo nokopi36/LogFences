@@ -2,6 +2,7 @@ package com.nokopi.logfences.datagen;
 
 import java.util.Set;
 
+import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -21,7 +22,9 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.dropSelf(ModBlocks.OAK_LOG_FENCE.get());
-        this.dropSelf(ModBlocks.OAK_LOG_FENCE_GATE.get());
+        for (LogWood wood : LogWood.values()) {
+            this.dropSelf(ModBlocks.fence(wood).get());
+            this.dropSelf(ModBlocks.fenceGate(wood).get());
+        }
     }
 }

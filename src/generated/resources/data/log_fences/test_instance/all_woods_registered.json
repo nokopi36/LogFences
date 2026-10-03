@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "log_fences:all_woods_registered",
+  "max_ticks": 20,
+  "structure": "log_fences:test_area"
+}

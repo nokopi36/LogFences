@@ -5,7 +5,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -15,12 +14,17 @@ public final class ModCreativeTabs {
 
     public static final String TAB_TITLE = "itemGroup." + LogFences.MODID;
 
-    // 専用タブ: 登録順にすべてのアイテムを並べる
+    // 専用タブ: 木の種類ごとにフェンス・ゲートの順で並べる
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> LOG_FENCES_TAB = CREATIVE_MODE_TABS.register("log_fences", () -> CreativeModeTab.builder()
             .title(Component.translatable(TAB_TITLE))
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-            .icon(() -> new ItemStack(ModItems.OAK_LOG_FENCE.get()))
-            .displayItems((parameters, output) -> ModItems.ITEMS.getEntries().forEach(item -> output.accept(item.get())))
+            .icon(() -> new ItemStack(ModItems.fence(LogWood.OAK).get()))
+            .displayItems((parameters, output) -> {
+                for (LogWood wood : LogWood.values()) {
+                    output.accept(ModItems.fence(wood).get());
+                    output.accept(ModItems.fenceGate(wood).get());
+                }
+            })
             .build());
 
     private ModCreativeTabs() {
@@ -29,10 +33,11 @@ public final class ModCreativeTabs {
     // 建築ブロックタブにも、各木のフェンスゲートの後ろに並べる
     static void addToVanillaTabs(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.insertAfter(new ItemStack(Items.OAK_FENCE_GATE), new ItemStack(ModItems.OAK_LOG_FENCE.get()),
-                    CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
-            event.insertAfter(new ItemStack(ModItems.OAK_LOG_FENCE.get()), new ItemStack(ModItems.OAK_LOG_FENCE_GATE.get()),
-                    CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+            for (LogWood wood : LogWood.values()) {
+                ItemStack fence = new ItemStack(ModItems.fence(wood).get());
+                event.insertAfter(new ItemStack(wood.vanillaFenceGate()), fence, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+                event.insertAfter(fence, new ItemStack(ModItems.fenceGate(wood).get()), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+            }
         }
     }
 }

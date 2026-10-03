@@ -3,6 +3,7 @@ package com.nokopi.logfences.datagen;
 import java.util.Optional;
 
 import com.nokopi.logfences.LogFences;
+import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.block.FencePart;
 import com.nokopi.logfences.block.GatePart;
@@ -20,7 +21,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -49,8 +49,10 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        createLogFence(blockModels, ModBlocks.OAK_LOG_FENCE.get(), Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG);
-        createLogFenceGate(blockModels, ModBlocks.OAK_LOG_FENCE_GATE.get(), Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG);
+        for (LogWood wood : LogWood.values()) {
+            createLogFence(blockModels, ModBlocks.fence(wood).get(), wood.log(), wood.strippedLog());
+            createLogFenceGate(blockModels, ModBlocks.fenceGate(wood).get(), wood.log(), wood.strippedLog());
+        }
     }
 
     private static TextureMapping logTextures(Block log) {

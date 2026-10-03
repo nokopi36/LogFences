@@ -1,6 +1,11 @@
 package com.nokopi.logfences;
 
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.function.UnaryOperator;
+
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -8,15 +13,29 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(LogFences.MODID);
 
-    // 燃料はバニラの木の柵と同じ（COOKING_TIME_WOOD_BLOCKS = 300 tick）
-    public static final DeferredItem<BlockItem> OAK_LOG_FENCE = ITEMS.registerSimpleBlockItem("oak_log_fence",
-            ModBlocks.OAK_LOG_FENCE,
-            p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+    private static final Map<LogWood, DeferredItem<BlockItem>> FENCES = new EnumMap<>(LogWood.class);
+    private static final Map<LogWood, DeferredItem<BlockItem>> FENCE_GATES = new EnumMap<>(LogWood.class);
 
-    public static final DeferredItem<BlockItem> OAK_LOG_FENCE_GATE = ITEMS.registerSimpleBlockItem("oak_log_fence_gate",
-            ModBlocks.OAK_LOG_FENCE_GATE,
-            p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+    static {
+        for (LogWood wood : LogWood.values()) {
+            FENCES.put(wood, ITEMS.registerSimpleBlockItem(wood.fenceName(), ModBlocks.fence(wood), fuel(wood)));
+            FENCE_GATES.put(wood, ITEMS.registerSimpleBlockItem(wood.fenceGateName(), ModBlocks.fenceGate(wood), fuel(wood)));
+        }
+    }
 
     private ModItems() {
+    }
+
+    public static DeferredItem<BlockItem> fence(LogWood wood) {
+        return FENCES.get(wood);
+    }
+
+    public static DeferredItem<BlockItem> fenceGate(LogWood wood) {
+        return FENCE_GATES.get(wood);
+    }
+
+    // 燃料はバニラの木のフェンスと同じ（COOKING_TIME_WOOD_BLOCKS = 300 tick）。ネザーの木は燃料にならない
+    private static UnaryOperator<Item.Properties> fuel(LogWood wood) {
+        return wood.flammable() ? p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS) : UnaryOperator.identity();
     }
 }

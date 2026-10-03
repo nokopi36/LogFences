@@ -1,15 +1,19 @@
 package com.nokopi.logfences.gametest;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.nokopi.logfences.LogFences;
+import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.block.FencePart;
 import com.nokopi.logfences.block.GatePart;
+import com.nokopi.logfences.block.StrippablePart;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.gametest.framework.FunctionGameTestInstance;
@@ -20,14 +24,17 @@ import net.minecraft.gametest.framework.TestData;
 import net.minecraft.gametest.framework.TestEnvironmentDefinition;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -44,6 +51,8 @@ public final class ModGameTests {
             TEST_FUNCTIONS.register("gate_part_detection", () -> ModGameTests::gatePartDetection);
     public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> GATE_STRIP_AND_TOGGLE =
             TEST_FUNCTIONS.register("gate_strip_and_toggle", () -> ModGameTests::gateStripAndToggle);
+    public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> ALL_WOODS_REGISTERED =
+            TEST_FUNCTIONS.register("all_woods_registered", () -> ModGameTests::allWoodsRegistered);
 
     // data/log_fences/structure/test_area.nbt（空の 3x3x3）
     private static final Identifier TEST_AREA = Identifier.fromNamespaceAndPath(LogFences.MODID, "test_area");
@@ -88,7 +97,7 @@ public final class ModGameTests {
     // SPEC 3.2: 斧でクリックした部位だけ剥がれ、剥がれ済みの部位では斧を消費しない
     private static void stripEachPart(GameTestHelper helper) {
         BlockPos pos = new BlockPos(1, 1, 1);
-        helper.setBlock(pos, ModBlocks.OAK_LOG_FENCE.get().defaultBlockState().setValue(FenceBlock.EAST, true));
+        helper.setBlock(pos, ModBlocks.fence(LogWood.OAK).get().defaultBlockState().setValue(FenceBlock.EAST, true));
 
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         ItemStack axe = new ItemStack(Items.IRON_AXE);
@@ -110,7 +119,7 @@ public final class ModGameTests {
 
         // 斧以外では剥がれない
         BlockPos other = new BlockPos(1, 1, 0);
-        helper.setBlock(other, ModBlocks.OAK_LOG_FENCE.get().defaultBlockState());
+        helper.setBlock(other, ModBlocks.fence(LogWood.OAK).get().defaultBlockState());
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
         click(helper, player, other, new Vec3(0.5, 0.5, 6.0 / 16.0), Direction.NORTH);
         assertStripped(helper, other, false, false, false);
@@ -158,7 +167,7 @@ public final class ModGameTests {
     private static void gateStripAndToggle(GameTestHelper helper) {
         BlockPos pos = new BlockPos(1, 1, 1);
         // 東向き: ゲートは z 方向に伸びる
-        helper.setBlock(pos, ModBlocks.OAK_LOG_FENCE_GATE.get().defaultBlockState().setValue(FenceGateBlock.FACING, Direction.EAST));
+        helper.setBlock(pos, ModBlocks.fenceGate(LogWood.OAK).get().defaultBlockState().setValue(FenceGateBlock.FACING, Direction.EAST));
 
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         ItemStack axe = new ItemStack(Items.IRON_AXE);
@@ -197,5 +206,23 @@ public final class ModGameTests {
                         && state.getValue(GatePart.UPPER_RAIL.strippedProperty()) == upper
                         && state.getValue(GatePart.LOWER_RAIL.strippedProperty()) == lower,
                 "expected post=" + post + " inner=" + inner + " upper=" + upper + " lower=" + lower + " but was " + state);
+    }
+
+    // SPEC 3.4: 全種類のフェンス・ゲートに剥ぎ用の状態・ドロップ・レシピがある
+    private static void allWoodsRegistered(GameTestHelper helper) {
+        MinecraftServer server = helper.getLevel().getServer();
+        for (LogWood wood : LogWood.values()) {
+            for (Block block : List.of(ModBlocks.fence(wood).get(), ModBlocks.fenceGate(wood).get())) {
+                for (StrippablePart part : block instanceof FenceGateBlock ? GatePart.values() : FencePart.values()) {
+                    helper.assertTrue(block.defaultBlockState().hasProperty(part.strippedProperty()),
+                            block + " has no " + part.strippedProperty().getName());
+                }
+                ResourceKey<LootTable> lootTable = block.getLootTable().orElseThrow();
+                helper.assertTrue(server.reloadableRegistries().getLootTable(lootTable) != LootTable.EMPTY, block + " has no loot table");
+                Identifier id = BuiltInRegistries.BLOCK.getKey(block);
+                helper.assertTrue(server.getRecipeManager().byKey(ResourceKey.create(Registries.RECIPE, id)).isPresent(), id + " has no recipe");
+            }
+        }
+        helper.succeed();
     }
 }

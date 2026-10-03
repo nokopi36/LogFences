@@ -3,11 +3,14 @@ package com.nokopi.logfences.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.nokopi.logfences.LogFences;
+import com.nokopi.logfences.LogWood;
+import com.nokopi.logfences.ModItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockItemTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagCopyingItemTagProvider;
 
@@ -21,5 +24,11 @@ public class ModItemTagsProvider extends BlockTagCopyingItemTagProvider {
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.copy(BlockItemTags.WOODEN_FENCES.block(), BlockItemTags.WOODEN_FENCES.item());
         this.copy(BlockItemTags.FENCE_GATES.block(), BlockItemTags.FENCE_GATES.item());
+        // バニラと同じく、ネザーの木のフェンス・ゲートは燃えない木材として扱う
+        for (LogWood wood : LogWood.values()) {
+            if (!wood.flammable()) {
+                this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(ModItems.fence(wood).getKey()).add(ModItems.fenceGate(wood).getKey());
+            }
+        }
     }
 }

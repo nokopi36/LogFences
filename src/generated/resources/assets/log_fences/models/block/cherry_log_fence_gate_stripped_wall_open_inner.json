@@ -1,0 +1,7 @@
+{
+  "parent": "log_fences:block/template_log_fence_gate_wall_open_inner",
+  "textures": {
+    "end": "minecraft:block/stripped_cherry_log_top",
+    "side": "minecraft:block/stripped_cherry_log"
+  }
+}

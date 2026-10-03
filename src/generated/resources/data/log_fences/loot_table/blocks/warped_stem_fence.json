@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "log_fences:warped_stem_fence"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "log_fences:blocks/warped_stem_fence"
+}
