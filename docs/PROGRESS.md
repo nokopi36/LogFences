@@ -27,6 +27,7 @@
 ## 公開準備（フェーズ 7）
 - 1.0.0 を Beta で公開（NeoForge 26.3 がベータのため）。jar 名 `logfences-neoforge-26.3-1.0.0.jar`
 - mods.toml: 説明文更新、displayURL / issueTrackerURL（GitHub）。logoFile はアイコン決定後
+- GitHub リポジトリは公開準備が整うまで private（2026-10-04 に切り替え）。**CurseForge で公開する前に public に戻す**（mods.toml と説明文の GitHub リンクが 404 になるため）
 - GameTest 用ファイルは jar に含めたまま（バニラと同じ形。/test を使わなければ影響なし）
 - CurseForge の説明文: `docs/curseforge/description.md`（英語 → 日本語）、変更履歴: `CHANGELOG.md`
 - CurseForge 規約（2026-10-04 確認）: AI はショーケース画像の誤認防止のみ規定、コードの規定なし。アイコン 400×400・単色不可・著作物不可・WebP 不可
