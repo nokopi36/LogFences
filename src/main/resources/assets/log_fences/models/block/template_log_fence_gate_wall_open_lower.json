@@ -1,0 +1,113 @@
+{
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "__comment": "Lower horizontal bar of left-hand gate door",
+      "from": [
+        0,
+        3,
+        9
+      ],
+      "to": [
+        2,
+        6,
+        13
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            9,
+            2,
+            13
+          ],
+          "texture": "#side"
+        },
+        "up": {
+          "uv": [
+            0,
+            9,
+            2,
+            13
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            9,
+            0,
+            12,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            9,
+            0,
+            12,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "__comment": "Lower horizontal bar of left-hand gate door",
+      "from": [
+        14,
+        3,
+        9
+      ],
+      "to": [
+        16,
+        6,
+        13
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            14,
+            9,
+            16,
+            13
+          ],
+          "texture": "#side"
+        },
+        "up": {
+          "uv": [
+            14,
+            9,
+            16,
+            13
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            9,
+            0,
+            12,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "east": {
+          "uv": [
+            9,
+            0,
+            12,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

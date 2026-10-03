@@ -1,0 +1,117 @@
+{
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "__comment": "Upper horizontal bar of left-hand gate door",
+      "from": [
+        2,
+        12,
+        7
+      ],
+      "to": [
+        6,
+        15,
+        9
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            4,
+            0,
+            7,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            7,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        }
+      }
+    },
+    {
+      "__comment": "Upper horizontal bar of right-hand gate door",
+      "from": [
+        10,
+        12,
+        7
+      ],
+      "to": [
+        14,
+        15,
+        9
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "up": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            4,
+            0,
+            7,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            7,
+            4
+          ],
+          "texture": "#side",
+          "rotation": 90
+        }
+      }
+    }
+  ]
+}

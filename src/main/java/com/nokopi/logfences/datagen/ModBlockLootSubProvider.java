@@ -22,5 +22,6 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.OAK_LOG_FENCE.get());
+        this.dropSelf(ModBlocks.OAK_LOG_FENCE_GATE.get());
     }
 }

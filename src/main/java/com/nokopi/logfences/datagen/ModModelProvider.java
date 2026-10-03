@@ -14,10 +14,13 @@ import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
@@ -28,7 +31,11 @@ public class ModModelProvider extends ModelProvider {
     private static final ModelTemplate LOG_FENCE_SIDE_LOWER = template("template_log_fence_side_lower", "_side_lower");
     private static final ModelTemplate LOG_FENCE_INVENTORY = template("template_log_fence_inventory", "_inventory");
 
+    private static final ModelTemplate LOG_FENCE_GATE_INVENTORY = template("template_log_fence_gate_inventory", "_inventory");
+
     private static final String STRIPPED_SUFFIX = "_stripped";
+    // ゲートの開閉・塀付きの組み合わせ（バニラの template_fence_gate[_wall][_open] に対応）
+    private static final String[] GATE_SHAPES = {"", "_open", "_wall", "_wall_open"};
 
     public ModModelProvider(PackOutput output) {
         super(output, LogFences.MODID);
@@ -42,6 +49,7 @@ public class ModModelProvider extends ModelProvider {
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         createLogFence(blockModels, ModBlocks.OAK_LOG_FENCE.get(), Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG);
+        createLogFenceGate(blockModels, ModBlocks.OAK_LOG_FENCE_GATE.get(), Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG);
     }
 
     private static TextureMapping logTextures(Block log) {
@@ -95,5 +103,53 @@ public class ModModelProvider extends ModelProvider {
         generator.with(BlockModelGenerators.condition()
                 .term(direction, true)
                 .term(part.strippedProperty(), isStripped), rail);
+    }
+
+    private static void createLogFenceGate(BlockModelGenerators blockModels, Block gate, Block log, Block strippedLog) {
+        TextureMapping bark = logTextures(log);
+        TextureMapping stripped = logTextures(strippedLog);
+
+        MultiPartGenerator generator = MultiPartGenerator.multiPart(gate);
+        for (String shape : GATE_SHAPES) {
+            boolean open = shape.contains("_open");
+            boolean inWall = shape.contains("_wall");
+            for (FencePart part : FencePart.values()) {
+                ModelTemplate template = template("template_log_fence_gate" + shape + "_" + gatePartName(part), shape + "_" + gatePartName(part));
+                for (boolean isStripped : new boolean[] {false, true}) {
+                    MultiVariant model = BlockModelGenerators.plainVariant(
+                            createModel(blockModels, template, gate, isStripped ? stripped : bark, isStripped));
+                    for (Direction facing : Direction.Plane.HORIZONTAL) {
+                        generator.with(BlockModelGenerators.condition()
+                                .term(FenceGateBlock.FACING, facing)
+                                .term(FenceGateBlock.OPEN, open)
+                                .term(FenceGateBlock.IN_WALL, inWall)
+                                .term(part.strippedProperty(), isStripped), rotateForGate(model, facing));
+                    }
+                }
+            }
+        }
+        blockModels.blockStateOutput.accept(generator);
+
+        // インベントリでは閉じた状態・樹皮付きの見た目
+        blockModels.registerSimpleItemModel(gate, LOG_FENCE_GATE_INVENTORY.create(gate, bark, blockModels.modelOutput));
+    }
+
+    private static String gatePartName(FencePart part) {
+        return switch (part) {
+            case POST -> "post";
+            case UPPER_RAIL -> "upper";
+            case LOWER_RAIL -> "lower";
+        };
+    }
+
+    // バニラのゲートと同じく、モデルは南向きが基準（west 90 / north 180 / east 270）
+    private static MultiVariant rotateForGate(MultiVariant model, Direction facing) {
+        VariantMutator rotation = switch (facing) {
+            case WEST -> BlockModelGenerators.Y_ROT_90;
+            case NORTH -> BlockModelGenerators.Y_ROT_180;
+            case EAST -> BlockModelGenerators.Y_ROT_270;
+            default -> null;
+        };
+        return rotation == null ? model : model.with(rotation);
     }
 }

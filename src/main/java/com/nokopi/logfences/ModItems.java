@@ -13,6 +13,10 @@ public final class ModItems {
             ModBlocks.OAK_LOG_FENCE,
             p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
 
+    public static final DeferredItem<BlockItem> OAK_LOG_FENCE_GATE = ITEMS.registerSimpleBlockItem("oak_log_fence_gate",
+            ModBlocks.OAK_LOG_FENCE_GATE,
+            p -> p.cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+
     private ModItems() {
     }
 }

@@ -20,6 +20,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider lookupProvider) {
         // wooden_fences: バニラの木の柵・フェンスゲートと繋がる（minecraft:fences にも含まれる）
         this.tag(BlockItemTags.WOODEN_FENCES.block()).add(ModBlocks.OAK_LOG_FENCE.getKey());
-        this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.OAK_LOG_FENCE.getKey());
+        this.tag(BlockItemTags.FENCE_GATES.block()).add(ModBlocks.OAK_LOG_FENCE_GATE.getKey());
+        this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.OAK_LOG_FENCE.getKey()).add(ModBlocks.OAK_LOG_FENCE_GATE.getKey());
     }
 }

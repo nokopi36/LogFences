@@ -9,17 +9,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class LogFenceBlock extends FenceBlock {
+public class LogFenceGateBlock extends FenceGateBlock {
     private final boolean flammable;
 
-    public LogFenceBlock(Properties properties, boolean flammable) {
-        super(properties);
+    public LogFenceGateBlock(WoodType type, Properties properties, boolean flammable) {
+        super(type, properties);
         this.flammable = flammable;
         this.registerDefaultState(BarkStripping.withAllBark(this.defaultBlockState()));
     }
@@ -35,21 +36,20 @@ public class LogFenceBlock extends FenceBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             InteractionHand hand, BlockHitResult hitResult) {
-        if (!BarkStripping.isAxe(stack)) {
+        // 開いた扉は当たり判定の外にあるので、剥ぐのは閉じているときだけ。それ以外は通常の開閉
+        if (!BarkStripping.isAxe(stack) || state.getValue(OPEN)) {
             return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
         Vec3 local = hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
-        FencePart part = FencePart.fromFenceHit(local.x, local.y, local.z, hasRails(state));
+        // ゲートは向きに対して左右対称なので、長さ方向の座標だけ取り出せばよい
+        double along = state.getValue(FACING).getAxis() == Direction.Axis.Z ? local.x : local.z;
+        FencePart part = FencePart.fromGateHit(along, local.y, state.getValue(IN_WALL));
         if (BarkStripping.isStripped(state, part)) {
-            // 剥がれ済みなら何もせず、通常の右クリック（リードを結ぶなど）に回す
+            // 剥がれ済みの部位なら開閉する
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
         BarkStripping.strip(state, part, level, pos, player, stack, hand);
         return InteractionResult.SUCCESS;
-    }
-
-    private static boolean hasRails(BlockState state) {
-        return state.getValue(NORTH) || state.getValue(EAST) || state.getValue(SOUTH) || state.getValue(WEST);
     }
 
     @Override

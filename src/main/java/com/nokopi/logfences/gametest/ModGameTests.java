@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -38,6 +39,10 @@ public final class ModGameTests {
             TEST_FUNCTIONS.register("fence_part_detection", () -> ModGameTests::fencePartDetection);
     public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> STRIP_EACH_PART =
             TEST_FUNCTIONS.register("strip_each_part", () -> ModGameTests::stripEachPart);
+    public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> GATE_PART_DETECTION =
+            TEST_FUNCTIONS.register("gate_part_detection", () -> ModGameTests::gatePartDetection);
+    public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> GATE_STRIP_AND_TOGGLE =
+            TEST_FUNCTIONS.register("gate_strip_and_toggle", () -> ModGameTests::gateStripAndToggle);
 
     // data/log_fences/structure/test_area.nbt（空の 3x3x3）
     private static final Identifier TEST_AREA = Identifier.fromNamespaceAndPath(LogFences.MODID, "test_area");
@@ -74,7 +79,7 @@ public final class ModGameTests {
     }
 
     private static void assertPart(GameTestHelper helper, FencePart expected, double x, double y, double z, boolean hasRails) {
-        FencePart actual = FencePart.fromLocalHit(x, y, z, hasRails);
+        FencePart actual = FencePart.fromFenceHit(x, y, z, hasRails);
         helper.assertTrue(actual == expected,
                 "(" + x + ", " + y + ", " + z + ", rails=" + hasRails + ") expected " + expected + " but was " + actual);
     }
@@ -123,5 +128,58 @@ public final class ModGameTests {
                         && state.getValue(FencePart.UPPER_RAIL.strippedProperty()) == upper
                         && state.getValue(FencePart.LOWER_RAIL.strippedProperty()) == lower,
                 "expected post=" + post + " upper=" + upper + " lower=" + lower + " but was " + state);
+    }
+
+    // SPEC 3.3: ゲートの部位判定（along はゲートの長さ方向）
+    private static void gatePartDetection(GameTestHelper helper) {
+        // 両端の柱・内側の縦木は柱
+        assertGatePart(helper, FencePart.POST, 1.0 / 16.0, 13.5 / 16.0, false);
+        assertGatePart(helper, FencePart.POST, 15.0 / 16.0, 7.5 / 16.0, false);
+        assertGatePart(helper, FencePart.POST, 8.0 / 16.0, 13.5 / 16.0, false);
+        // 扉の横木
+        assertGatePart(helper, FencePart.UPPER_RAIL, 4.0 / 16.0, 13.5 / 16.0, false);
+        assertGatePart(helper, FencePart.LOWER_RAIL, 12.0 / 16.0, 7.5 / 16.0, false);
+        // 塀付き（3/16 下がる）: 上の横木 y 9〜12/16、下の横木 y 3〜6/16
+        assertGatePart(helper, FencePart.UPPER_RAIL, 4.0 / 16.0, 10.5 / 16.0, true);
+        assertGatePart(helper, FencePart.LOWER_RAIL, 4.0 / 16.0, 4.5 / 16.0, true);
+        helper.succeed();
+    }
+
+    private static void assertGatePart(GameTestHelper helper, FencePart expected, double along, double y, boolean inWall) {
+        FencePart actual = FencePart.fromGateHit(along, y, inWall);
+        helper.assertTrue(actual == expected,
+                "gate(" + along + ", " + y + ", wall=" + inWall + ") expected " + expected + " but was " + actual);
+    }
+
+    // SPEC 3.3: 閉じたゲートは斧で部位を剥ぎ、剥がれ済みの部位や開いたゲートでは開閉する
+    private static void gateStripAndToggle(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(1, 1, 1);
+        // 東向き: ゲートは z 方向に伸びる
+        helper.setBlock(pos, ModBlocks.OAK_LOG_FENCE_GATE.get().defaultBlockState().setValue(FenceGateBlock.FACING, Direction.EAST));
+
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        ItemStack axe = new ItemStack(Items.IRON_AXE);
+        player.setItemInHand(InteractionHand.MAIN_HAND, axe);
+
+        // z = 4/16 の上の横木
+        click(helper, player, pos, new Vec3(0.5, 13.5 / 16.0, 4.0 / 16.0), Direction.EAST);
+        assertStripped(helper, pos, false, true, false);
+        helper.assertBlockProperty(pos, FenceGateBlock.OPEN, false);
+
+        // 剥がれ済みの上の横木をもう一度 → 開く（斧は減らない）
+        click(helper, player, pos, new Vec3(0.5, 13.5 / 16.0, 4.0 / 16.0), Direction.EAST);
+        helper.assertBlockProperty(pos, FenceGateBlock.OPEN, true);
+        helper.assertTrue(axe.getDamageValue() == 1, "axe damage should be 1 but was " + axe.getDamageValue());
+
+        // 開いているときは柱を狙っても剥がれず、閉じる
+        click(helper, player, pos, new Vec3(0.5, 0.5, 1.0 / 16.0), Direction.EAST);
+        helper.assertBlockProperty(pos, FenceGateBlock.OPEN, false);
+        assertStripped(helper, pos, false, true, false);
+
+        // 閉じた状態で内側の縦木 → 柱が剥がれる
+        click(helper, player, pos, new Vec3(0.5, 0.5, 8.0 / 16.0), Direction.EAST);
+        assertStripped(helper, pos, true, true, false);
+        helper.assertTrue(axe.getDamageValue() == 2, "axe damage should be 2 but was " + axe.getDamageValue());
+        helper.succeed();
     }
 }

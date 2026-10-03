@@ -31,6 +31,8 @@ public final class ModCreativeTabs {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.insertAfter(new ItemStack(Items.OAK_FENCE_GATE), new ItemStack(ModItems.OAK_LOG_FENCE.get()),
                     CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+            event.insertAfter(new ItemStack(ModItems.OAK_LOG_FENCE.get()), new ItemStack(ModItems.OAK_LOG_FENCE_GATE.get()),
+                    CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
         }
     }
 }

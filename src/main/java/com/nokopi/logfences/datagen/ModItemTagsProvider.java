@@ -20,5 +20,6 @@ public class ModItemTagsProvider extends BlockTagCopyingItemTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.copy(BlockItemTags.WOODEN_FENCES.block(), BlockItemTags.WOODEN_FENCES.item());
+        this.copy(BlockItemTags.FENCE_GATES.block(), BlockItemTags.FENCE_GATES.item());
     }
 }

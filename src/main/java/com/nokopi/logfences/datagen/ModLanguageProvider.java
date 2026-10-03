@@ -19,6 +19,7 @@ public final class ModLanguageProvider {
         @Override
         protected void addTranslations() {
             this.addBlock(ModBlocks.OAK_LOG_FENCE, "Oak Log Fence");
+            this.addBlock(ModBlocks.OAK_LOG_FENCE_GATE, "Oak Log Fence Gate");
             this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
     }
@@ -31,6 +32,7 @@ public final class ModLanguageProvider {
         @Override
         protected void addTranslations() {
             this.addBlock(ModBlocks.OAK_LOG_FENCE, "オークの原木のフェンス");
+            this.addBlock(ModBlocks.OAK_LOG_FENCE_GATE, "オークの原木のフェンスゲート");
             this.add(ModCreativeTabs.TAB_TITLE, "Log Fences");
         }
     }
