@@ -13,10 +13,10 @@ import net.minecraft.world.level.ItemLike;
 
 // 26.x ではレシピはリロード可能なレジストリとして生成する（DataGenerators で RecipeProvider.asBootstrap に渡す）
 public class ModRecipeProvider extends RecipeProvider {
-    // SPEC 4 章。バニラ（板材 4 + 棒 2 → フェンス 3 個）を原木 1 = 板材 4 で換算
-    private static final int FENCE_COUNT = 12;
-    // バニラ（板材 2 + 棒 4 → ゲート 1 個）を同じく換算
-    private static final int FENCE_GATE_COUNT = 4;
+    // SPEC 4 章。バニラの「板材 4 + 棒 2 → フェンス 3 個」「板材 2 + 棒 4 → ゲート 1 個」を、
+    // 原木 1 個 = 板材 LogWood#planksPerLog 枚で換算する（原木 12 個・4 個、竹ブロック 6 個・2 個）
+    private static final int VANILLA_FENCES_PER_PLANK_RECIPE = 3;
+    private static final int VANILLA_FENCE_GATES_PER_PLANK_RECIPE = 1;
 
     public ModRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
         super(recipeOutput, advancementOutput);
@@ -25,15 +25,27 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
         for (LogWood wood : LogWood.values()) {
-            logFence(ModItems.fence(wood).get(), wood.log());
-            logFenceGate(ModItems.fenceGate(wood).get(), wood.log());
-            logFence(ModItems.strippedFence(wood).get(), wood.strippedLog());
-            logFenceGate(ModItems.strippedFenceGate(wood).get(), wood.strippedLog());
+            int fenceCount = fenceCount(wood);
+            int fenceGateCount = fenceGateCount(wood);
+            logFence(ModItems.fence(wood).get(), wood.log(), fenceCount);
+            logFenceGate(ModItems.fenceGate(wood).get(), wood.log(), fenceGateCount);
+            logFence(ModItems.strippedFence(wood).get(), wood.strippedLog(), fenceCount);
+            logFenceGate(ModItems.strippedFenceGate(wood).get(), wood.strippedLog(), fenceGateCount);
         }
     }
 
-    private void logFence(ItemLike result, ItemLike log) {
-        this.shaped(RecipeCategory.DECORATIONS, result, FENCE_COUNT)
+    // フェンスのレシピは原木 4 個 = 板材 4 * planksPerLog 枚分で、バニラのレシピ planksPerLog 回分
+    public static int fenceCount(LogWood wood) {
+        return VANILLA_FENCES_PER_PLANK_RECIPE * wood.planksPerLog();
+    }
+
+    // ゲートのレシピは原木 2 個 = 板材 2 * planksPerLog 枚分で、バニラのレシピ planksPerLog 回分
+    public static int fenceGateCount(LogWood wood) {
+        return VANILLA_FENCE_GATES_PER_PLANK_RECIPE * wood.planksPerLog();
+    }
+
+    private void logFence(ItemLike result, ItemLike log, int count) {
+        this.shaped(RecipeCategory.DECORATIONS, result, count)
                 .define('W', log)
                 .define('#', Items.STICK)
                 .pattern("W#W")
@@ -43,8 +55,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(this.output);
     }
 
-    private void logFenceGate(ItemLike result, ItemLike log) {
-        this.shaped(RecipeCategory.REDSTONE, result, FENCE_GATE_COUNT)
+    private void logFenceGate(ItemLike result, ItemLike log, int count) {
+        this.shaped(RecipeCategory.REDSTONE, result, count)
                 .define('#', Items.STICK)
                 .define('W', log)
                 .pattern("#W#")

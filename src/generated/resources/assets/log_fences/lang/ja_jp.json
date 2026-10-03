@@ -1,6 +1,8 @@
 {
   "block.log_fences.acacia_log_fence": "アカシアの原木のフェンス",
   "block.log_fences.acacia_log_fence_gate": "アカシアの原木のフェンスゲート",
+  "block.log_fences.bamboo_block_fence": "竹ブロックのフェンス",
+  "block.log_fences.bamboo_block_fence_gate": "竹ブロックのフェンスゲート",
   "block.log_fences.birch_log_fence": "シラカバの原木のフェンス",
   "block.log_fences.birch_log_fence_gate": "シラカバの原木のフェンスゲート",
   "block.log_fences.cherry_log_fence": "サクラの原木のフェンス",
@@ -25,6 +27,8 @@
   "block.log_fences.warped_stem_fence_gate": "歪んだ幹のフェンスゲート",
   "item.log_fences.stripped_acacia_log_fence": "樹皮を剥いだアカシアの原木のフェンス",
   "item.log_fences.stripped_acacia_log_fence_gate": "樹皮を剥いだアカシアの原木のフェンスゲート",
+  "item.log_fences.stripped_bamboo_block_fence": "表皮を剥いだ竹ブロックのフェンス",
+  "item.log_fences.stripped_bamboo_block_fence_gate": "表皮を剥いだ竹ブロックのフェンスゲート",
   "item.log_fences.stripped_birch_log_fence": "樹皮を剥いだシラカバの原木のフェンス",
   "item.log_fences.stripped_birch_log_fence_gate": "樹皮を剥いだシラカバの原木のフェンスゲート",
   "item.log_fences.stripped_cherry_log_fence": "樹皮を剥いだサクラの原木のフェンス",

@@ -8,34 +8,40 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 /**
  * 原木のフェンス・フェンスゲートを作る木の種類（SPEC 2 章）。並び順はクリエイティブタブの並び順。
- * 表示名はバニラの原木・幹の名前に合わせる。
+ * 表示名はバニラの原木・幹・竹ブロックの名前に合わせる。
  */
 public enum LogWood {
-    OAK("oak_log", WoodType.OAK, true, "Oak Log", "オークの原木"),
-    SPRUCE("spruce_log", WoodType.SPRUCE, true, "Spruce Log", "トウヒの原木"),
-    BIRCH("birch_log", WoodType.BIRCH, true, "Birch Log", "シラカバの原木"),
-    JUNGLE("jungle_log", WoodType.JUNGLE, true, "Jungle Log", "ジャングルの原木"),
-    ACACIA("acacia_log", WoodType.ACACIA, true, "Acacia Log", "アカシアの原木"),
-    DARK_OAK("dark_oak_log", WoodType.DARK_OAK, true, "Dark Oak Log", "ダークオークの原木"),
-    MANGROVE("mangrove_log", WoodType.MANGROVE, true, "Mangrove Log", "マングローブの原木"),
-    CHERRY("cherry_log", WoodType.CHERRY, true, "Cherry Log", "サクラの原木"),
-    PALE_OAK("pale_oak_log", WoodType.PALE_OAK, true, "Pale Oak Log", "ペールオークの原木"),
-    POPLAR("poplar_log", WoodType.POPLAR, true, "Poplar Log", "ポプラの原木"),
-    CRIMSON("crimson_stem", WoodType.CRIMSON, false, "Crimson Stem", "真紅の幹"),
-    WARPED("warped_stem", WoodType.WARPED, false, "Warped Stem", "歪んだ幹");
+    OAK("oak_log", WoodType.OAK, true, "Oak Log", "オークの原木", "樹皮", 4),
+    SPRUCE("spruce_log", WoodType.SPRUCE, true, "Spruce Log", "トウヒの原木", "樹皮", 4),
+    BIRCH("birch_log", WoodType.BIRCH, true, "Birch Log", "シラカバの原木", "樹皮", 4),
+    JUNGLE("jungle_log", WoodType.JUNGLE, true, "Jungle Log", "ジャングルの原木", "樹皮", 4),
+    ACACIA("acacia_log", WoodType.ACACIA, true, "Acacia Log", "アカシアの原木", "樹皮", 4),
+    DARK_OAK("dark_oak_log", WoodType.DARK_OAK, true, "Dark Oak Log", "ダークオークの原木", "樹皮", 4),
+    MANGROVE("mangrove_log", WoodType.MANGROVE, true, "Mangrove Log", "マングローブの原木", "樹皮", 4),
+    CHERRY("cherry_log", WoodType.CHERRY, true, "Cherry Log", "サクラの原木", "樹皮", 4),
+    PALE_OAK("pale_oak_log", WoodType.PALE_OAK, true, "Pale Oak Log", "ペールオークの原木", "樹皮", 4),
+    POPLAR("poplar_log", WoodType.POPLAR, true, "Poplar Log", "ポプラの原木", "樹皮", 4),
+    BAMBOO("bamboo_block", WoodType.BAMBOO, true, "Bamboo Block", "竹ブロック", "表皮", 2),
+    CRIMSON("crimson_stem", WoodType.CRIMSON, false, "Crimson Stem", "真紅の幹", "表皮", 4),
+    WARPED("warped_stem", WoodType.WARPED, false, "Warped Stem", "歪んだ幹", "表皮", 4);
 
     private final String logName;
     private final WoodType woodType;
     private final boolean flammable;
     private final String englishName;
     private final String japaneseName;
+    private final String strippedJapanesePrefix;
+    private final int planksPerLog;
 
-    LogWood(String logName, WoodType woodType, boolean flammable, String englishName, String japaneseName) {
+    LogWood(String logName, WoodType woodType, boolean flammable, String englishName, String japaneseName,
+            String strippedJapanesePrefix, int planksPerLog) {
         this.logName = logName;
         this.woodType = woodType;
         this.flammable = flammable;
         this.englishName = englishName;
         this.japaneseName = japaneseName;
+        this.strippedJapanesePrefix = strippedJapanesePrefix;
+        this.planksPerLog = planksPerLog;
     }
 
     public String fenceName() {
@@ -71,9 +77,14 @@ public enum LogWood {
         return this.japaneseName;
     }
 
-    // バニラに合わせ、原木は「樹皮を剥いだ」、ネザーの幹は「表皮を剥いだ」
+    // バニラに合わせ、原木は「樹皮を剥いだ」、ネザーの幹と竹ブロックは「表皮を剥いだ」
     public String strippedJapaneseName() {
-        return (this.logName.endsWith("_stem") ? "表皮" : "樹皮") + "を剥いだ" + this.japaneseName;
+        return this.strippedJapanesePrefix + "を剥いだ" + this.japaneseName;
+    }
+
+    // 原木 1 個をクラフトしてできる板材の枚数（レシピの個数の換算に使う）
+    public int planksPerLog() {
+        return this.planksPerLog;
     }
 
     // バニラのブロック・アイテムは登録後に参照するため、メソッドで取り出す
@@ -89,6 +100,7 @@ public enum LogWood {
             case CHERRY -> Blocks.CHERRY_LOG;
             case PALE_OAK -> Blocks.PALE_OAK_LOG;
             case POPLAR -> Blocks.POPLAR_LOG;
+            case BAMBOO -> Blocks.BAMBOO_BLOCK;
             case CRIMSON -> Blocks.CRIMSON_STEM;
             case WARPED -> Blocks.WARPED_STEM;
         };
@@ -106,6 +118,7 @@ public enum LogWood {
             case CHERRY -> Blocks.STRIPPED_CHERRY_LOG;
             case PALE_OAK -> Blocks.STRIPPED_PALE_OAK_LOG;
             case POPLAR -> Blocks.STRIPPED_POPLAR_LOG;
+            case BAMBOO -> Blocks.STRIPPED_BAMBOO_BLOCK;
             case CRIMSON -> Blocks.STRIPPED_CRIMSON_STEM;
             case WARPED -> Blocks.STRIPPED_WARPED_STEM;
         };
@@ -124,6 +137,7 @@ public enum LogWood {
             case CHERRY -> Items.CHERRY_FENCE_GATE;
             case PALE_OAK -> Items.PALE_OAK_FENCE_GATE;
             case POPLAR -> Items.POPLAR_FENCE_GATE;
+            case BAMBOO -> Items.BAMBOO_FENCE_GATE;
             case CRIMSON -> Items.CRIMSON_FENCE_GATE;
             case WARPED -> Items.WARPED_FENCE_GATE;
         };

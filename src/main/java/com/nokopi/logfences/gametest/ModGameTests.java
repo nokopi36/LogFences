@@ -7,6 +7,7 @@ import com.nokopi.logfences.LogFences;
 import com.nokopi.logfences.LogWood;
 import com.nokopi.logfences.ModBlocks;
 import com.nokopi.logfences.ModItems;
+import com.nokopi.logfences.datagen.ModRecipeProvider;
 import com.nokopi.logfences.block.FencePart;
 import com.nokopi.logfences.block.GatePart;
 import com.nokopi.logfences.block.StrippablePart;
@@ -32,6 +33,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -59,6 +62,8 @@ public final class ModGameTests {
             TEST_FUNCTIONS.register("all_woods_registered", () -> ModGameTests::allWoodsRegistered);
     public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> STRIPPED_PLACE_AND_DROP =
             TEST_FUNCTIONS.register("stripped_place_and_drop", () -> ModGameTests::strippedPlaceAndDrop);
+    public static final DeferredHolder<Consumer<GameTestHelper>, Consumer<GameTestHelper>> RECIPE_COUNTS =
+            TEST_FUNCTIONS.register("recipe_counts", () -> ModGameTests::recipeCounts);
 
     // data/log_fences/structure/test_area.nbt（空の 3x3x3）
     private static final Identifier TEST_AREA = Identifier.fromNamespaceAndPath(LogFences.MODID, "test_area");
@@ -267,5 +272,30 @@ public final class ModGameTests {
         ServerLevel level = helper.getLevel();
         List<ItemStack> drops = Block.getDrops(state, level, helper.absolutePos(BlockPos.ZERO), null);
         helper.assertTrue(drops.size() == 1 && drops.get(0).is(expected), state + " should drop " + expected + " but dropped " + drops);
+    }
+
+    // SPEC 4 章・3.7: レシピの個数（原木 12・4、竹ブロック 6・2）
+    private static void recipeCounts(GameTestHelper helper) {
+        assertRecipeCount(helper, ModItems.fence(LogWood.OAK).get(), 12);
+        assertRecipeCount(helper, ModItems.fenceGate(LogWood.OAK).get(), 4);
+        assertRecipeCount(helper, ModItems.fence(LogWood.BAMBOO).get(), 6);
+        assertRecipeCount(helper, ModItems.fenceGate(LogWood.BAMBOO).get(), 2);
+        assertRecipeCount(helper, ModItems.strippedFence(LogWood.BAMBOO).get(), 6);
+        assertRecipeCount(helper, ModItems.strippedFenceGate(LogWood.BAMBOO).get(), 2);
+        for (LogWood wood : LogWood.values()) {
+            assertRecipeCount(helper, ModItems.fence(wood).get(), ModRecipeProvider.fenceCount(wood));
+            assertRecipeCount(helper, ModItems.fenceGate(wood).get(), ModRecipeProvider.fenceGateCount(wood));
+        }
+        helper.succeed();
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void assertRecipeCount(GameTestHelper helper, Item item, int expected) {
+        Identifier id = BuiltInRegistries.ITEM.getKey(item);
+        Recipe<?> recipe = helper.getLevel().getServer().getRecipeManager()
+                .byKey(ResourceKey.create(Registries.RECIPE, id)).orElseThrow().value();
+        ItemStack result = ((Recipe<CraftingInput>) recipe).assemble(CraftingInput.EMPTY);
+        helper.assertTrue(result.is(item) && result.getCount() == expected,
+                id + " recipe should make " + expected + " but makes " + result);
     }
 }

@@ -10,6 +10,7 @@
     "log_fences:stripped_cherry_log_fence",
     "log_fences:stripped_pale_oak_log_fence",
     "log_fences:stripped_poplar_log_fence",
+    "log_fences:stripped_bamboo_block_fence",
     "log_fences:stripped_crimson_stem_fence",
     "log_fences:stripped_warped_stem_fence",
     "log_fences:oak_log_fence",
@@ -22,6 +23,7 @@
     "log_fences:cherry_log_fence",
     "log_fences:pale_oak_log_fence",
     "log_fences:poplar_log_fence",
+    "log_fences:bamboo_block_fence",
     "log_fences:crimson_stem_fence",
     "log_fences:warped_stem_fence"
   ]

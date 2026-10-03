@@ -1,6 +1,8 @@
 {
   "block.log_fences.acacia_log_fence": "Acacia Log Fence",
   "block.log_fences.acacia_log_fence_gate": "Acacia Log Fence Gate",
+  "block.log_fences.bamboo_block_fence": "Bamboo Block Fence",
+  "block.log_fences.bamboo_block_fence_gate": "Bamboo Block Fence Gate",
   "block.log_fences.birch_log_fence": "Birch Log Fence",
   "block.log_fences.birch_log_fence_gate": "Birch Log Fence Gate",
   "block.log_fences.cherry_log_fence": "Cherry Log Fence",
@@ -25,6 +27,8 @@
   "block.log_fences.warped_stem_fence_gate": "Warped Stem Fence Gate",
   "item.log_fences.stripped_acacia_log_fence": "Stripped Acacia Log Fence",
   "item.log_fences.stripped_acacia_log_fence_gate": "Stripped Acacia Log Fence Gate",
+  "item.log_fences.stripped_bamboo_block_fence": "Stripped Bamboo Block Fence",
+  "item.log_fences.stripped_bamboo_block_fence_gate": "Stripped Bamboo Block Fence Gate",
   "item.log_fences.stripped_birch_log_fence": "Stripped Birch Log Fence",
   "item.log_fences.stripped_birch_log_fence_gate": "Stripped Birch Log Fence Gate",
   "item.log_fences.stripped_cherry_log_fence": "Stripped Cherry Log Fence",
