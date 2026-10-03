@@ -4,7 +4,7 @@
 
 ## 現在地
 - 実装中: なし
-- 次にやること: 未定（残りの「いつか」: 樹皮を戻す手段・Macaw's Fences 連携。または公開準備（フェーズ 7））
+- 次にやること: フェーズ 7（公開準備）。残り: アイコン（400×400、未定）、まっさらな環境での jar の起動確認、CurseForge へのアップロード
 
 ## 完了
 | 日付 | 機能 | コミット | メモ |
@@ -23,6 +23,13 @@
 - `mcsrc/` に NeoForge 本体のソース（gradle キャッシュの `neoforge-*-sources.jar`）も展開済み。NeoForge 更新時は両方展開し直す
 - GameTest 用ファイル（`data/log_fences/structure/test_area.nbt`・`test_instance/`）が配布 jar に入る。フェーズ 7 で除外するか検討
 - NeoForge 26.3 はベータ版。正式版が出たら `neo_version` を上げて追従する
+
+## 公開準備（フェーズ 7）
+- 1.0.0 を Beta で公開（NeoForge 26.3 がベータのため）。jar 名 `logfences-neoforge-26.3-1.0.0.jar`
+- mods.toml: 説明文更新、displayURL / issueTrackerURL（GitHub）。logoFile はアイコン決定後
+- GameTest 用ファイルは jar に含めたまま（バニラと同じ形。/test を使わなければ影響なし）
+- CurseForge の説明文: `docs/curseforge/description.md`（英語 → 日本語）、変更履歴: `CHANGELOG.md`
+- CurseForge 規約（2026-10-04 確認）: AI はショーケース画像の誤認防止のみ規定、コードの規定なし。アイコン 400×400・単色不可・著作物不可・WebP 不可
 
 ## 他 MOD との互換性
 - Diagonal Fences 26.3.0（+ Puzzles Lib 26.3.9）: 一緒に入れても動くが、Log Fences のフェンスは斜めにならない（状態の項目数が違うため対象外）。GameTest も成功。連携は SPEC 3.6「いつか」に記録
