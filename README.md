@@ -20,6 +20,10 @@ Strip the bark off each part separately with an axe to customize the look.
 - Same stats as vanilla wooden fences: hardness, sounds, flammability (nether woods do not burn) and furnace fuel.
 - Uses the vanilla log textures, so it also works with resource packs.
 
+## Compatibility
+
+- [Diagonal Fences](https://modrinth.com/mod/diagonal-fences): works together, but log fences do not connect diagonally (they keep the vanilla four-direction connections).
+
 ## Recipes
 
 | Result | Recipe |

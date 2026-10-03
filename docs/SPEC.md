@@ -87,6 +87,9 @@
 ### 3.6 その他（優先度: いつか）
 - 樹皮を戻す手段（樹皮アイテムなど）
 - Macaw's Fences などとの連携
+- Diagonal Fences（Fuzs、26.3 NeoForge 版あり）との連携: 斜めに繋がるようにする
+  - 現状: Diagonal Blocks は状態の項目がバニラと同じ 5 個のフェンスだけを自動対応にするため、剥ぎ用の状態を持つ Log Fences は対象外（斜めにならないだけで、クラッシュはしない。2026-10-04 に動作確認）
+  - 対応するなら: Diagonal Blocks の API（`DiagonalBlockType#registerBlockFactory`）で、剥ぎの状態と処理を持つ斜め版フェンスを登録する（Diagonal Fences があるときだけ有効）。斜めの横木のモデル（樹皮あり・なし）と、斜めの横木の部位判定も必要
 
 ## 4. レシピ
 | 結果 | 種類 | 材料・配置 | 優先度 |

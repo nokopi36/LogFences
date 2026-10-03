@@ -24,6 +24,9 @@
 - GameTest 用ファイル（`data/log_fences/structure/test_area.nbt`・`test_instance/`）が配布 jar に入る。フェーズ 7 で除外するか検討
 - NeoForge 26.3 はベータ版。正式版が出たら `neo_version` を上げて追従する
 
+## 他 MOD との互換性
+- Diagonal Fences 26.3.0（+ Puzzles Lib 26.3.9）: 一緒に入れても動くが、Log Fences のフェンスは斜めにならない（状態の項目数が違うため対象外）。GameTest も成功。連携は SPEC 3.6「いつか」に記録
+
 ## 遊んでみた感想・調整したいこと
 - テクスチャ（横向きの木目・柱上面の年輪）は好評
 - ゲートはフェンスより細かく剥げてよい → 4 部位に変更済み
