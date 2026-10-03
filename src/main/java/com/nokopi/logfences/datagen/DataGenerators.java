@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.nokopi.logfences.LogFences;
+import com.nokopi.logfences.gametest.ModGameTests;
 
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -27,6 +28,9 @@ public final class DataGenerators {
                 .add(Registries.LOOT_TABLE, new LootTableProvider(Set.of(),
                         List.of(new LootTableProvider.SubProviderEntry(ModBlockLootSubProvider::new, LootContextParamSets.BLOCK))))
                 .add(RecipeProvider.asBootstrap(ModRecipeProvider::new)));
+
+        event.createWorldRegistryObjects(new RegistrySetBuilder()
+                .add(Registries.TEST_INSTANCE, ModGameTests::bootstrapInstances));
 
         event.createBlockAndItemTags(ModBlockTagsProvider::new, ModItemTagsProvider::new);
         event.createProvider(ModModelProvider::new);
