@@ -42,10 +42,6 @@ The counts follow the vanilla plank recipes: 1 log = 4 planks, and 1 Block of Ba
 - Uses the vanilla log textures, so resource packs that change logs change these fences too.
 - All items are in the **Log Fences** creative tab, and also in the Building Blocks tab next to each vanilla fence gate.
 - **Diagonal Fences**: works together, but log fences keep the vanilla four-direction connections and do not connect diagonally.
-
-## Requirements
-- Minecraft 26.3
-- NeoForge 26.3.0.42-beta or later
 - Required on both the client and the server.
 
 ## Links
@@ -98,10 +94,6 @@ The counts follow the vanilla plank recipes: 1 log = 4 planks, and 1 Block of Ba
 - バニラの原木のテクスチャを使うので、原木を変えるリソースパックを入れると、このフェンスの見た目も変わります。
 - すべてのアイテムは「Log Fences」タブにあります。「建築ブロック」タブでも、各木のバニラのフェンスゲートの後ろに並んでいます。
 - **Diagonal Fences**: 一緒に使えますが、原木のフェンスは斜めには繋がりません（バニラと同じ 4 方向の繋がりのままです）。
-
-## 動作環境
-- Minecraft 26.3
-- NeoForge 26.3.0.42-beta 以降
 - クライアントとサーバーの両方に必要です。
 
 ## リンク
