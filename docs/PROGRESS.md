@@ -4,7 +4,7 @@
 
 ## 現在地
 - 実装中: なし
-- 次にやること: フェーズ 7（公開準備）。残り: アイコン（400×400、未定）、まっさらな環境での jar の起動確認、CurseForge へのアップロード
+- 次にやること: フェーズ 7（公開準備）。残り: まっさらな環境での jar の起動確認、GitHub を public に戻す、CurseForge へのアップロード
 
 ## 完了
 | 日付 | 機能 | コミット | メモ |
@@ -26,7 +26,8 @@
 
 ## 公開準備（フェーズ 7）
 - 1.0.0 を Beta で公開（NeoForge 26.3 がベータのため）。jar 名 `logfences-neoforge-26.3-1.0.0.jar`
-- mods.toml: 説明文更新、displayURL / issueTrackerURL（GitHub）。logoFile はアイコン決定後
+- mods.toml: 説明文更新、displayURL / issueTrackerURL（GitHub）、logoFile = `logo.png`
+- アイコン: ゲーム内スクリーンショット（2026-10-04_22.52.48.png）を切り抜き・面積平均で 400×400 に縮小。`src/main/resources/logo.png` と `docs/curseforge/icon.png`（同じ画像）
 - GitHub リポジトリは公開準備が整うまで private（2026-10-04 に切り替え）。**CurseForge で公開する前に public に戻す**（mods.toml と説明文の GitHub リンクが 404 になるため）
 - GameTest 用ファイルは jar に含めたまま（バニラと同じ形。/test を使わなければ影響なし）
 - CurseForge の説明文: `docs/curseforge/description.md`（英語 → 日本語）、変更履歴: `CHANGELOG.md`
