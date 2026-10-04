@@ -31,7 +31,7 @@
 - アイコン: ゲーム内スクリーンショット（2026-10-04_22.52.48.png）を切り抜き・面積平均で 400×400 に縮小。`src/main/resources/logo.png` と `docs/curseforge/icon.png`（同じ画像）
 - MOD 一覧の左の小さいアイコン: NeoForge 26.3 は `iconFile`（24×24 表示）が `logoFile` と別。柱 1 本と剥いだ横木をアップで切り抜いた 128×128 の `src/main/resources/icon.png`、`iconBlur=true`
 - クライアントの確認（2026-10-04、ランチャーの新規プロファイル・NeoForge 26.3.0.48-beta・jar 単体）: 起動・MOD 一覧・設置と剥ぎ OK
-- GitHub Releases: v1.0.0 を pre-release（Beta）で作成し jar を添付（タグ v1.0.0 = 0c8a7de）。リリースノートは CHANGELOG の該当節 + 対応バージョン + SHA-256。README・CurseForge の説明文にはバージョンを書かず、CHANGELOG と Releases で追う
+- GitHub Releases: v1.0.0 を pre-release（Beta）で作成し jar を添付。改名に伴い作り直した（タグ v1.0.0 = 849d78e、`logfencesandgates-neoforge-26.3-1.0.0.jar`、SHA-256 bd34ce90…）。リリースノートは CHANGELOG の該当節 + 対応バージョン + SHA-256。README・CurseForge の説明文にはバージョンを書かず、CHANGELOG と Releases で追う
 - GitHub リポジトリ: 公開準備の間 private にし、2026-10-04 に public に戻した。README の状態を「1.0.0 Beta、CurseForge で公開予定」に更新
 - GameTest 用ファイルは jar に含めたまま（バニラと同じ形。/test を使わなければ影響なし）
 - CurseForge の説明文: `docs/curseforge/description.md`（英語 → 日本語）、変更履歴: `CHANGELOG.md`
