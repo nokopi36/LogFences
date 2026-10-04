@@ -1,11 +1,13 @@
 # Log Fences
 
+<img src="src/main/resources/logo.png" alt="Log Fences" width="200">
+
 [English](README.md)
 
 バニラのすべての木に、原木の見た目のフェンスとフェンスゲートを追加する Minecraft の MOD です。
 斧で部位ごとに樹皮を剥いで、見た目をカスタマイズできます。
 
-> **状態:** 開発中。まだ配布していません。
+> **状態:** Minecraft 26.3 / NeoForge 向けの 1.0.0 Beta。CurseForge で公開予定です。変更履歴は [CHANGELOG.md](CHANGELOG.md) を見てください。
 
 ## 機能
 
@@ -39,6 +41,7 @@
 
 - Minecraft 26.3
 - NeoForge 26.3.0.42-beta 以降
+- クライアントとサーバーの両方に必要です。
 
 ## ビルド
 
@@ -46,7 +49,7 @@
 ./gradlew build
 ```
 
-`build/libs/` に jar ができます。Java 25 は Gradle が自動でダウンロードします。
+`build/libs/logfences-neoforge-<Minecraft バージョン>-<MOD バージョン>.jar` ができます。Java 25 は Gradle が自動でダウンロードします。
 
 そのほかのタスク:
 

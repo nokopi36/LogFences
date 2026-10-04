@@ -4,7 +4,7 @@
 
 ## 現在地
 - 実装中: なし
-- 次にやること: フェーズ 7（公開準備）。残り: クライアントでの jar の起動確認（ランチャーの新規プロファイル）、GitHub を public に戻す、CurseForge へのアップロード
+- 次にやること: フェーズ 7（公開準備）。残り: CurseForge へのアップロード（ユーザー）。公開後に README の状態欄へ CurseForge のリンクを追加する
 
 ## 完了
 | 日付 | 機能 | コミット | メモ |
@@ -30,7 +30,7 @@
 - アイコン: ゲーム内スクリーンショット（2026-10-04_22.52.48.png）を切り抜き・面積平均で 400×400 に縮小。`src/main/resources/logo.png` と `docs/curseforge/icon.png`（同じ画像）
 - MOD 一覧の左の小さいアイコン: NeoForge 26.3 は `iconFile`（24×24 表示）が `logoFile` と別。柱 1 本と剥いだ横木をアップで切り抜いた 128×128 の `src/main/resources/icon.png`、`iconBlur=true`
 - クライアントの確認（2026-10-04、ランチャーの新規プロファイル・NeoForge 26.3.0.48-beta・jar 単体）: 起動・MOD 一覧・設置と剥ぎ OK
-- GitHub リポジトリは公開準備が整うまで private（2026-10-04 に切り替え）。**CurseForge で公開する前に public に戻す**（mods.toml と説明文の GitHub リンクが 404 になるため）
+- GitHub リポジトリ: 公開準備の間 private にし、2026-10-04 に public に戻した。README の状態を「1.0.0 Beta、CurseForge で公開予定」に更新
 - GameTest 用ファイルは jar に含めたまま（バニラと同じ形。/test を使わなければ影響なし）
 - CurseForge の説明文: `docs/curseforge/description.md`（英語 → 日本語）、変更履歴: `CHANGELOG.md`
 - CurseForge 規約（2026-10-04 確認）: AI はショーケース画像の誤認防止のみ規定、コードの規定なし。アイコン 400×400・単色不可・著作物不可・WebP 不可

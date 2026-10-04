@@ -1,11 +1,13 @@
 # Log Fences
 
+<img src="src/main/resources/logo.png" alt="Log Fences" width="200">
+
 [日本語](README.ja.md)
 
 A Minecraft mod that adds log-textured fences and fence gates for every vanilla wood type.
 Strip the bark off each part separately with an axe to customize the look.
 
-> **Status:** in development. Not yet released.
+> **Status:** 1.0.0 Beta for Minecraft 26.3 / NeoForge. Coming soon to CurseForge. See the [changelog](CHANGELOG.md).
 
 ## Features
 
@@ -39,6 +41,7 @@ The counts match the vanilla plank recipes (1 log = 4 planks, 1 block of bamboo 
 
 - Minecraft 26.3
 - NeoForge 26.3.0.42-beta or later
+- Required on both the client and the server.
 
 ## Building
 
@@ -46,7 +49,7 @@ The counts match the vanilla plank recipes (1 log = 4 planks, 1 block of bamboo 
 ./gradlew build
 ```
 
-The jar is written to `build/libs/`. Gradle downloads Java 25 automatically through its toolchain support.
+The jar is written to `build/libs/logfences-neoforge-<Minecraft version>-<mod version>.jar`. Gradle downloads Java 25 automatically through its toolchain support.
 
 Other useful tasks:
 
