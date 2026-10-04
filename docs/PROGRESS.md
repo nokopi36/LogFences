@@ -26,7 +26,7 @@
 
 ## 公開準備（フェーズ 7）
 - **2026-10-04 に MOD 名を変更**: Log Fences → Log Fences and Gates（CurseForge に同名の別 MOD があったため）。mod_id `log_fences_and_gates`、パッケージ `com.nokopi.logfencesandgates`、メインクラス `LogFencesAndGates`、jar `logfencesandgates-neoforge-<MC>-<ver>.jar`、GitHub `nokopi36/LogFencesAndGates`。CurseForge のプロジェクト「Log Fences and Gates」作成済み。以下の記録の旧名はそのまま残している
-- 1.0.0 を Beta で公開（NeoForge 26.3 がベータのため）。jar 名 `logfences-neoforge-26.3-1.0.0.jar`
+- 1.0.0 は Release で公開（2026-10-05 に Beta から変更。MOD は完成しているため。NeoForge 26.3 はまだベータなので、NeoForge 側の変更で壊れたら修正版で対応する）。jar 名 `logfences-neoforge-26.3-1.0.0.jar`
 - mods.toml: 説明文更新、displayURL / issueTrackerURL（GitHub）、bannerFile = `logo.png`（26.3 では logoFile は非推奨で警告が出る）
 - アイコン: ゲーム内スクリーンショット（2026-10-04_22.52.48.png）を切り抜き・面積平均で 400×400 に縮小。`src/main/resources/logo.png` と `docs/curseforge/icon.png`（同じ画像）
 - MOD 一覧の左の小さいアイコン: NeoForge 26.3 は `iconFile`（24×24 表示）が `logoFile` と別。柱 1 本と剥いだ横木をアップで切り抜いた 128×128 の `src/main/resources/icon.png`、`iconBlur=true`

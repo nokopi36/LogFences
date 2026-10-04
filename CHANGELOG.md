@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — Minecraft 26.3 / NeoForge 26.3.0.42-beta (Beta)
+## 1.0.0 — Minecraft 26.3 / NeoForge 26.3.0.42-beta
 
 First release.
 
