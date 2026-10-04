@@ -1,0 +1,176 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_post"
+      },
+      "when": {
+        "post_stripped": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_post"
+      },
+      "when": {
+        "post_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_upper"
+      },
+      "when": {
+        "north": "true",
+        "upper_stripped": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_upper",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "upper_stripped": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_upper",
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "upper_stripped": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_upper",
+        "y": 270
+      },
+      "when": {
+        "upper_stripped": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_upper"
+      },
+      "when": {
+        "north": "true",
+        "upper_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_upper",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "upper_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_upper",
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "upper_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_upper",
+        "y": 270
+      },
+      "when": {
+        "upper_stripped": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_lower"
+      },
+      "when": {
+        "lower_stripped": "false",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_lower",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "lower_stripped": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_lower",
+        "y": 180
+      },
+      "when": {
+        "lower_stripped": "false",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_side_lower",
+        "y": 270
+      },
+      "when": {
+        "lower_stripped": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_lower"
+      },
+      "when": {
+        "lower_stripped": "true",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_lower",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "lower_stripped": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_lower",
+        "y": 180
+      },
+      "when": {
+        "lower_stripped": "true",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "log_fences_and_gates:block/warped_stem_fence_stripped_side_lower",
+        "y": 270
+      },
+      "when": {
+        "lower_stripped": "true",
+        "west": "true"
+      }
+    }
+  ]
+}

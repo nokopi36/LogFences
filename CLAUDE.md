@@ -1,10 +1,10 @@
-# Log Fences
+# Log Fences and Gates
 
 オリジナル MOD。仕様は `docs/SPEC.md`、進捗は `docs/PROGRESS.md`。作業開始時に両方を読むこと。
 
 ## 環境
 - Minecraft 26.3 / NeoForge 26.3.0.42-beta / Java 25（Gradle の toolchain が自動取得。Gradle 本体は JAVA_HOME の JDK 24 で動く）
-- mod_id: `log_fences` / パッケージ: `com.nokopi.logfences` / 作者: `nokopi`
+- mod_id: `log_fences_and_gates` / パッケージ: `com.nokopi.logfencesandgates` / 作者: `nokopi`
 - 連携 MOD: なし
 
 ## 参考資料（refs/ — 読み取り専用）

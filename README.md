@@ -1,6 +1,6 @@
-# Log Fences
+# Log Fences and Gates
 
-<img src="src/main/resources/logo.png" alt="Log Fences" width="200">
+<img src="src/main/resources/logo.png" alt="Log Fences and Gates" width="200">
 
 [日本語](README.ja.md)
 
@@ -48,7 +48,7 @@ The counts match the vanilla plank recipes (1 log = 4 planks, 1 block of bamboo 
 ./gradlew build
 ```
 
-The jar is written to `build/libs/logfences-neoforge-<Minecraft version>-<mod version>.jar`. Gradle downloads Java 25 automatically through its toolchain support.
+The jar is written to `build/libs/logfencesandgates-neoforge-<Minecraft version>-<mod version>.jar`. Gradle downloads Java 25 automatically through its toolchain support.
 
 Other useful tasks:
 

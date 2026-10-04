@@ -31,8 +31,8 @@ repositories {
 }
 
 base {
-    // 配布ファイル名: logfences-neoforge-<Minecraft バージョン>-<MOD バージョン>.jar
-    archivesName = "logfences-neoforge-${minecraft_version}"
+    // 配布ファイル名: logfencesandgates-neoforge-<Minecraft バージョン>-<MOD バージョン>.jar
+    archivesName = "logfencesandgates-neoforge-${minecraft_version}"
 }
 
 // Mojang ships Java 25 to end users in 26.3, so mods should target Java 25.

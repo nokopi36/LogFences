@@ -1,12 +1,12 @@
 {
   "values": [
-    "log_fences:crimson_stem_fence",
-    "log_fences:crimson_stem_fence_gate",
-    "log_fences:stripped_crimson_stem_fence",
-    "log_fences:stripped_crimson_stem_fence_gate",
-    "log_fences:warped_stem_fence",
-    "log_fences:warped_stem_fence_gate",
-    "log_fences:stripped_warped_stem_fence",
-    "log_fences:stripped_warped_stem_fence_gate"
+    "log_fences_and_gates:crimson_stem_fence",
+    "log_fences_and_gates:crimson_stem_fence_gate",
+    "log_fences_and_gates:stripped_crimson_stem_fence",
+    "log_fences_and_gates:stripped_crimson_stem_fence_gate",
+    "log_fences_and_gates:warped_stem_fence",
+    "log_fences_and_gates:warped_stem_fence_gate",
+    "log_fences_and_gates:stripped_warped_stem_fence",
+    "log_fences_and_gates:stripped_warped_stem_fence_gate"
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "log_fences_and_gates:block/template_log_fence_side_lower",
+  "textures": {
+    "end": "minecraft:block/stripped_dark_oak_log_top",
+    "side": "minecraft:block/stripped_dark_oak_log"
+  }
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "log_fences:block/template_log_fence_gate_open_upper",
-  "textures": {
-    "end": "minecraft:block/bamboo_block_top",
-    "side": "minecraft:block/bamboo_block"
-  }
-}

@@ -1,4 +1,4 @@
-# Log Fences
+# Log Fences and Gates
 
 Fences and fence gates with the look of logs, for every vanilla wood type.
 Strip the bark off each part separately with an axe and mix bark and bare wood however you like.
@@ -40,17 +40,17 @@ The counts follow the vanilla plank recipes: 1 log = 4 planks, and 1 Block of Ba
 
 ## Good to know
 - Uses the vanilla log textures, so resource packs that change logs change these fences too.
-- All items are in the **Log Fences** creative tab, and also in the Building Blocks tab next to each vanilla fence gate.
+- All items are in the **Log Fences and Gates** creative tab, and also in the Building Blocks tab next to each vanilla fence gate.
 - **Diagonal Fences**: works together, but log fences keep the vanilla four-direction connections and do not connect diagonally.
 - Required on both the client and the server.
 
 ## Links
-- Source code and bug reports: https://github.com/nokopi36/LogFences
+- Source code and bug reports: https://github.com/nokopi36/LogFencesAndGates
 - License: MIT
 
 ---
 
-# Log Fences（日本語）
+# Log Fences and Gates（日本語）
 
 バニラのすべての木に、原木の見た目のフェンスとフェンスゲートを追加します。
 斧で部位ごとに樹皮を剥いで、樹皮と木肌を自由に組み合わせられます。
@@ -92,10 +92,10 @@ The counts follow the vanilla plank recipes: 1 log = 4 planks, and 1 Block of Ba
 
 ## その他
 - バニラの原木のテクスチャを使うので、原木を変えるリソースパックを入れると、このフェンスの見た目も変わります。
-- すべてのアイテムは「Log Fences」タブにあります。「建築ブロック」タブでも、各木のバニラのフェンスゲートの後ろに並んでいます。
+- すべてのアイテムは「Log Fences and Gates」タブにあります。「建築ブロック」タブでも、各木のバニラのフェンスゲートの後ろに並んでいます。
 - **Diagonal Fences**: 一緒に使えますが、原木のフェンスは斜めには繋がりません（バニラと同じ 4 方向の繋がりのままです）。
 - クライアントとサーバーの両方に必要です。
 
 ## リンク
-- ソースコード・不具合報告: https://github.com/nokopi36/LogFences
+- ソースコード・不具合報告: https://github.com/nokopi36/LogFencesAndGates
 - ライセンス: MIT

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:function",
-  "environment": "minecraft:default",
-  "function": "log_fences:gate_strip_and_toggle",
-  "max_ticks": 20,
-  "structure": "log_fences:test_area"
-}

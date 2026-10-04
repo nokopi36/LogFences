@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "log_fences_and_gates:block/spruce_log_fence_inventory"
+  }
+}

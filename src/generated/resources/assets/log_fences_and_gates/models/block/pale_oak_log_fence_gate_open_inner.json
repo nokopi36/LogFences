@@ -1,0 +1,7 @@
+{
+  "parent": "log_fences_and_gates:block/template_log_fence_gate_open_inner",
+  "textures": {
+    "end": "minecraft:block/pale_oak_log_top",
+    "side": "minecraft:block/pale_oak_log"
+  }
+}

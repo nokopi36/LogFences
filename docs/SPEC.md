@@ -1,6 +1,6 @@
-# Log Fences 仕様書
+# Log Fences and Gates 仕様書
 
-- mod_id: `log_fences` / パッケージ: `com.nokopi.logfences` / 作者: `nokopi` / ライセンス: MIT
+- mod_id: `log_fences_and_gates` / パッケージ: `com.nokopi.logfencesandgates` / 作者: `nokopi` / ライセンス: MIT
 - Minecraft 26.3 / NeoForge 26.3.0.42-beta（ベータ。正式版が出たら追従する）
 - 連携 MOD: なし
 - 利用範囲: 公開予定（CurseForge）
@@ -88,7 +88,7 @@
 - 樹皮を戻す手段（樹皮アイテムなど）
 - Macaw's Fences などとの連携
 - Diagonal Fences（Fuzs、26.3 NeoForge 版あり）との連携: 斜めに繋がるようにする
-  - 現状: Diagonal Blocks は状態の項目がバニラと同じ 5 個のフェンスだけを自動対応にするため、剥ぎ用の状態を持つ Log Fences は対象外（斜めにならないだけで、クラッシュはしない。2026-10-04 に動作確認）
+  - 現状: Diagonal Blocks は状態の項目がバニラと同じ 5 個のフェンスだけを自動対応にするため、剥ぎ用の状態を持つ Log Fences and Gates は対象外（斜めにならないだけで、クラッシュはしない。2026-10-04 に動作確認）
   - 対応するなら: Diagonal Blocks の API（`DiagonalBlockType#registerBlockFactory`）で、剥ぎの状態と処理を持つ斜め版フェンスを登録する（Diagonal Fences があるときだけ有効）。斜めの横木のモデル（樹皮あり・なし）と、斜めの横木の部位判定も必要
 
 ## 4. レシピ
@@ -107,7 +107,7 @@
 - モデル: 柱（樹皮あり／なし）、上の横木（樹皮あり／なし）、下の横木（樹皮あり／なし）、インベントリ用、ゲート一式。datagen で出力する
 - 音: バニラの音を使う
 - 言語ファイル: `en_us.json` / `ja_jp.json`
-- クリエイティブタブ: 専用タブ「Log Fences」に全ブロックを並べ、バニラの「建築ブロック」タブにも各木のフェンスゲートの後ろに追加する
+- クリエイティブタブ: 専用タブ「Log Fences and Gates」に全ブロックを並べ、バニラの「建築ブロック」タブにも各木のフェンスゲートの後ろに追加する
 
 ## 6. 実装順
 1. 共通基盤（メインクラス、登録、言語ファイル、datagen の土台）

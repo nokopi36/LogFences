@@ -1,6 +1,6 @@
-# Log Fences
+# Log Fences and Gates
 
-<img src="src/main/resources/logo.png" alt="Log Fences" width="200">
+<img src="src/main/resources/logo.png" alt="Log Fences and Gates" width="200">
 
 [English](README.md)
 
@@ -48,7 +48,7 @@
 ./gradlew build
 ```
 
-`build/libs/logfences-neoforge-<Minecraft バージョン>-<MOD バージョン>.jar` ができます。Java 25 は Gradle が自動でダウンロードします。
+`build/libs/logfencesandgates-neoforge-<Minecraft バージョン>-<MOD バージョン>.jar` ができます。Java 25 は Gradle が自動でダウンロードします。
 
 そのほかのタスク:
 

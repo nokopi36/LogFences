@@ -1,0 +1,7 @@
+{
+  "parent": "log_fences_and_gates:block/template_log_fence_gate_wall_open_lower",
+  "textures": {
+    "end": "minecraft:block/birch_log_top",
+    "side": "minecraft:block/birch_log"
+  }
+}

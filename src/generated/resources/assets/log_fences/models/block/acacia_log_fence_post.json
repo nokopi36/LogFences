@@ -1,7 +1,0 @@
-{
-  "parent": "log_fences:block/template_log_fence_post",
-  "textures": {
-    "end": "minecraft:block/acacia_log_top",
-    "side": "minecraft:block/acacia_log"
-  }
-}
