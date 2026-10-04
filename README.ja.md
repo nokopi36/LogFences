@@ -7,7 +7,7 @@
 バニラのすべての木に、原木の見た目のフェンスとフェンスゲートを追加する Minecraft の MOD です。
 斧で部位ごとに樹皮を剥いで、見た目をカスタマイズできます。
 
-> **状態:** Minecraft 26.3 / NeoForge 向けの 1.0.0 Beta。CurseForge で公開予定です。変更履歴は [CHANGELOG.md](CHANGELOG.md) を見てください。
+> **状態:** Beta。CurseForge で公開予定です。対応バージョンは [CHANGELOG.md](CHANGELOG.md) を見てください。
 
 ## 機能
 
@@ -39,8 +39,7 @@
 
 ## 動作環境
 
-- Minecraft 26.3
-- NeoForge 26.3.0.42-beta 以降
+- NeoForge。各リリースが対応する Minecraft と NeoForge のバージョンは [CHANGELOG.md](CHANGELOG.md) を見てください。
 - クライアントとサーバーの両方に必要です。
 
 ## ビルド

@@ -7,7 +7,7 @@
 A Minecraft mod that adds log-textured fences and fence gates for every vanilla wood type.
 Strip the bark off each part separately with an axe to customize the look.
 
-> **Status:** 1.0.0 Beta for Minecraft 26.3 / NeoForge. Coming soon to CurseForge. See the [changelog](CHANGELOG.md).
+> **Status:** Beta. Coming soon to CurseForge. See the [changelog](CHANGELOG.md) for supported versions.
 
 ## Features
 
@@ -39,8 +39,7 @@ The counts match the vanilla plank recipes (1 log = 4 planks, 1 block of bamboo 
 
 ## Requirements
 
-- Minecraft 26.3
-- NeoForge 26.3.0.42-beta or later
+- NeoForge. See the [changelog](CHANGELOG.md) for the supported Minecraft and NeoForge versions of each release.
 - Required on both the client and the server.
 
 ## Building
