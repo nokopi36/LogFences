@@ -1,6 +1,6 @@
 # Log Fences
 
-Fences and fence gates that look like real logs, for every vanilla wood type.
+Fences and fence gates with the look of logs, for every vanilla wood type.
 Strip the bark off each part separately with an axe and mix bark and bare wood however you like.
 
 ## Features
@@ -52,7 +52,7 @@ The counts follow the vanilla plank recipes: 1 log = 4 planks, and 1 Block of Ba
 
 # Log Fences（日本語）
 
-バニラのすべての木に、本物の原木のような見た目のフェンスとフェンスゲートを追加します。
+バニラのすべての木に、原木の見た目のフェンスとフェンスゲートを追加します。
 斧で部位ごとに樹皮を剥いで、樹皮と木肌を自由に組み合わせられます。
 
 ## 機能
