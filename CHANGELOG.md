@@ -10,3 +10,14 @@ First release.
 - Recipes: 12 fences or 4 gates from logs; 6 fences or 2 gates from Blocks of Bamboo.
 - Added the Log Fences and Gates creative tab. Items are also listed in the Building Blocks tab.
 - English and Japanese translations.
+
+**日本語**
+
+最初のリリースです。
+
+- 13 種類の木の原木のフェンス・フェンスゲートを追加: オーク、トウヒ、シラカバ、ジャングル、アカシア、ダークオーク、マングローブ、サクラ、ペールオーク、ポプラ、竹ブロック、真紅の幹、歪んだ幹
+- 斧で部位ごとに樹皮を剥げるようにした。フェンスは 3 部位（柱・上の横木・下の横木）、フェンスゲートは 4 部位（両端の柱・内側の縦木・上の横木・下の横木）
+- 樹皮を剥いだ原木からクラフトする「剥いだ版」を追加。置いた時点で全部位が剥がれている
+- レシピ: 原木からフェンス 12 個・ゲート 4 個、竹ブロックからフェンス 6 個・ゲート 2 個
+- 専用のクリエイティブタブ「Log Fences and Gates」を追加。「建築ブロック」タブにも並ぶ
+- 英語・日本語に対応
